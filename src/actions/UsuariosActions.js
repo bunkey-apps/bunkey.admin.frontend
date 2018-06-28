@@ -1,5 +1,5 @@
 /**
- * Clientes Actions
+ * Contratos Actions
  */
 import axios from 'axios';
 import {

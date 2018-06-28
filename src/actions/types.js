@@ -20,7 +20,7 @@ export const SEARCH_USERS = 'SEARCH_USERS';
 export const GET_RECENT_CHAT_USERS = 'GET_RECENT_CHAT_USERS';
 
 
-//Clientes Action
+//Contratos Action
 export const GET_CONTRATOS = 'GET_CONTRATOS';
 export const GET_CONTRATOS_SUCCES = 'GET_CONTRATOS_SUCCES';
 export const GET_CONTRATOS_FAILURE = 'GET_CONTRATOS_FAILURE';

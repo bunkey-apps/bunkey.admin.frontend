@@ -7,5 +7,5 @@ export * from './EmailAppActions';
 export * from './TodoAppActions';
 export * from './AuthActions';
 export * from './FeedbacksActions';
-export * from './ClientesActions';
+export * from './ContratosActions';
 export * from './UsuariosActions';
