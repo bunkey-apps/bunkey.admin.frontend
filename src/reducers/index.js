@@ -10,7 +10,7 @@ import todoAppReducer from './TodoAppReducer';
 import authUserReducer from './AuthUserReducer';
 import feedbacksReducer from './FeedbacksReducer';
 import clientesReducer from './ClientesReducer';
-
+import usuariosReducer from './UsuariosReducer';
 
 const reducers = combineReducers({
   settings,
@@ -20,7 +20,8 @@ const reducers = combineReducers({
   todoApp: todoAppReducer,
   authUser: authUserReducer,
   feedback: feedbacksReducer,
-  clientes: clientesReducer
+  clientes: clientesReducer,
+  usuarios: usuariosReducer
 });
 
 export default reducers;

@@ -57,7 +57,7 @@ class Usuarios extends Component {
         return (       
           
           
-<div>
+        <div>
 
 
           
@@ -73,23 +73,25 @@ class Usuarios extends Component {
                 <TableHead>
                   <TableRow hover>
                     <TableCell numeric>#</TableCell>
-                    <TableCell>Contradddto + ID</TableCell>
+                    <TableCell>Nombre</TableCell>
+                    <TableCell>e-mail</TableCell>
                     <TableCell>Estado</TableCell>
-                    <TableCell>Monto</TableCell>
-                    <TableCell>Pagado</TableCell>
+                    <TableCell>Rol</TableCell>
                     <TableCell>Acciones</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <Fragment>
-                    {data.map(n => {
+                    {items.map((n, index) => {
                       return (
-                        <TableRow hover key={n.id}>
-                          <TableCell numeric>{n.num}</TableCell>
-                          <TableCell>{n.contrato}</TableCell>
-                          <TableCell>{n.estado}</TableCell>
-                          <TableCell>{n.monto}</TableCell>
-                          <TableCell>{n.estadoPago}</TableCell>
+                        <TableRow hover key={index}>
+                         <TableCell numeric>{index}</TableCell>
+                          <TableCell>{n.name}</TableCell>
+                          <TableCell>{n.email}</TableCell>
+                          {n.status ?  <TableCell>Activo</TableCell> : <TableCell>Pendiente</TableCell>}
+
+                         
+                          <TableCell>{n.role}</TableCell>
                           <TableCell></TableCell>
                         </TableRow>
                       );

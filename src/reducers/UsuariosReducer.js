@@ -25,7 +25,7 @@ export default (state = INIT_STATE, action) => {
         case GET_USUARIOS:
             return { ...state, loading: true };
 
-        // get cartolas
+        // get Usuarios
         case GET_USUARIOS_SUCCES:
             return {
                 ...state,
