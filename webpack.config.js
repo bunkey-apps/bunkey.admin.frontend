@@ -52,7 +52,7 @@ module.exports = {
     devServer: {
         contentBase: false,
         compress: true,
-        port: 3000 // port number
+        port: process.env.PORT || 5000, // port number
     },
     module: {
         rules: [

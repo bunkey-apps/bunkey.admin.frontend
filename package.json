@@ -4,7 +4,8 @@
   "description": "A Material Design Reactjs + Redux Admin Template",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "serve": "gulp serveProject"
   },
   "keywords": [],
   "author": "The Iron Network",
@@ -19,6 +20,8 @@
     "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.5.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.0",
@@ -34,9 +37,11 @@
     "webpack-dev-server": "^3.1.3"
   },
   "dependencies": {
-    "@devexpress/dx-react-core": "^1.1.1",
-    "@devexpress/dx-react-grid": "^1.1.1",
-    "@devexpress/dx-react-grid-material-ui": "^1.1.1",
+    "@devexpress/dx-react-core": "^1.4.0",
+    "@devexpress/dx-react-grid": "^1.4.0",
+    "@devexpress/dx-react-grid-material-ui": "^1.3.0",
+    "@material-ui/core": "^1.2.1",
+    "@material-ui/icons": "^1.1.0",
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
