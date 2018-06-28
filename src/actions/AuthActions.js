@@ -15,6 +15,15 @@ import {
     SIGNUP_USER_FAILURE
 } from '../actions/types';
 
+
+const instance = axios.create({
+    baseURL: 'http://dev-api.bunkey.aureolab.cl/',
+    timeout: 30000,
+    headers: {'Content-Type': 'application/json'}
+  });
+
+
+
 /**
  * Redux Action To Sigin User With Firebase
  */
@@ -141,11 +150,14 @@ export const signinUserWithTwitter = (history) => (dispatch) => {
  * Redux Action To Signin User in signinUserWithBunkey
  */
 export const signinUserWithBunkey = (user, history) => (dispatch) => {
-    console.log('signinUserWithBunkey');
+    console.log('signinUserWithBunkey2',user);
     dispatch({ type: LOGIN_USER });
-    axios.get('https://private-anon-29819f91c9-bunkeyapigateway.apiary-mock.com/v1/admin/users')
+    instance.post('v1/auth/sign-in',{
+        email: user.email,
+        password: user.password})
     .then((user) => {
-        console.log('usuario es',user);
+        console.log('usuario es3',user);
+        localStorage.setItem("user_id", JSON.stringify(user.data));
         dispatch({ type: LOGIN_USER_SUCCESS, payload: user.data });
         history.push('/');
         NotificationManager.success('User Login Successfully!');

@@ -9,8 +9,8 @@ import sidebarReducer from './SidebarReducer';
 import todoAppReducer from './TodoAppReducer';
 import authUserReducer from './AuthUserReducer';
 import feedbacksReducer from './FeedbacksReducer';
-import clientesReducer from './ClientesReducer';
-
+import contratosReducer from './ContratosReducer';
+import usuariosReducer from './UsuariosReducer';
 
 const reducers = combineReducers({
   settings,
@@ -20,7 +20,8 @@ const reducers = combineReducers({
   todoApp: todoAppReducer,
   authUser: authUserReducer,
   feedback: feedbacksReducer,
-  clientes: clientesReducer
+  contratos: contratosReducer,
+  usuarios: usuariosReducer
 });
 
 export default reducers;

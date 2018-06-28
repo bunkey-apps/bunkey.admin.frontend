@@ -1,5 +1,5 @@
 /**
- * Clientes Actions
+ * Contratos Actions
  */
 import axios from 'axios';
 import {
@@ -11,14 +11,29 @@ import {
 // app config
 import AppConfig from '../constants/AppConfig';
 
+
+
+
+
 /**
  * Redux Action To Get Contratos
  */
 export const getUsuarios = () => (dispatch) => {
     dispatch({ type: GET_USUARIOS });
-    axios.get('https://private-anon-29819f91c9-bunkeyapigateway.apiary-mock.com/v1/admin/users')
+    const token = localStorage.getItem('user_id');
+
+    const tokenJson = JSON.parse(token);
+
+    console.log('tokenJson4',tokenJson.accessToken);
+    var instance2 = axios.create({
+        baseURL: 'http://dev-api.bunkey.aureolab.cl/',
+        timeout: 3000,
+        headers: {'Content-Type': 'application/json','Authorization': 'Bearer ' + tokenJson.accessToken}
+      });
+   
+    instance2.get('v1/admin/users')
         .then((response) => {
-            console.log('response usuarios',response);
+            console.log('response usuarios2',response);
             dispatch({ type: GET_USUARIOS_SUCCES, payload: response.data });
         })
         .catch(error => {

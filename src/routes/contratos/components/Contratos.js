@@ -106,8 +106,8 @@ class Contratos extends Component {
     }
    
 // map state to props
-const mapStateToProps = ({ clientes }) => {
-    return clientes;
+const mapStateToProps = ({ contratos }) => {
+    return contratos;
   }
   
   export default connect(mapStateToProps, {

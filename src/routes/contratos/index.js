@@ -39,7 +39,7 @@ const data = [
   ];
 
 
-class ClientesPage extends Component {
+class ContratosPage extends Component {
   render() {
      return (
         <div className="dashboard-v1">
@@ -89,4 +89,4 @@ class ClientesPage extends Component {
   }
 }
  
-export default ClientesPage;
+export default ContratosPage;
