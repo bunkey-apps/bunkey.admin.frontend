@@ -24,9 +24,15 @@ const AsyncUsuariosComponent = Loadable({
     loader: () => import("../../routes/usuarios/index.js"),
     loading: () =>   <RctPageLoader />,
 });
+
+// Clientes
+const AsyncClientesComponent = Loadable({
+    loader: () => import("../../routes/clientes/index.js"),
+    loading: () =>   <RctPageLoader />,
+});
 // Contratos
 const AsyncContratosComponent = Loadable({
-    loader: () => import("../../routes/Contratos/index.js"),
+    loader: () => import("../../routes/contratos/index.js"),
     loading: () =>   <RctPageLoader />,
 });
 
@@ -576,6 +582,7 @@ export {
     AsyncAdvanceUIAutoCompleteComponent,
     AsyncTagsComponent,
     AsyncUsuariosComponent,
-    AsyncContratosComponent
+    AsyncContratosComponent,
+    AsyncClientesComponent
 
 };

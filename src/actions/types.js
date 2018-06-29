@@ -30,6 +30,12 @@ export const GET_USUARIOS = 'GET_USUARIOS';
 export const GET_USUARIOS_SUCCES = 'GET_USUARIOS_SUCCES';
 export const GET_USUARIOS_FAILURE = 'GET_USUARIOS_FAILURE';
 
+//Clientes Action
+export const GET_CLIENTES = 'GET_CLIENTES';
+export const GET_CLIENTES_FAILURE = 'GET_CLIENTES_FAILURE';
+export const GET_CLIENTES_SUCCES = 'GET_CLIENTES_SUCCES';
+
+
 
 // Mail App
 export const GET_EMAILS = 'GET_EMAILS'; 

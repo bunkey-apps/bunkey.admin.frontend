@@ -11,6 +11,9 @@ import authUserReducer from './AuthUserReducer';
 import feedbacksReducer from './FeedbacksReducer';
 import contratosReducer from './ContratosReducer';
 import usuariosReducer from './UsuariosReducer';
+import clientesReducer from './ClientesReducer';
+
+
 
 const reducers = combineReducers({
   settings,
@@ -21,7 +24,8 @@ const reducers = combineReducers({
   authUser: authUserReducer,
   feedback: feedbacksReducer,
   contratos: contratosReducer,
-  usuarios: usuariosReducer
+  usuarios: usuariosReducer,
+  clientes: clientesReducer
 });
 
 export default reducers;

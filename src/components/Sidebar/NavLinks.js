@@ -10,7 +10,7 @@ export default {
             {
                   "menu_title": "Clientes",
                   "menu_icon": "ti-heart",
-                  "path": "/app/Contratos",
+                  "path": "/app/clientes",
                   "child_routes": null
             },
             {
