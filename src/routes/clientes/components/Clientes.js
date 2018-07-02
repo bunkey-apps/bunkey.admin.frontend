@@ -12,7 +12,7 @@ import Button from 'material-ui/Button';
 import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle, } from 'material-ui/Dialog';
 import Snackbar from 'material-ui/Snackbar';
 import Avatar from 'material-ui/Avatar';
-
+import moment from 'moment';
 // page title bar
 import PageTitleBar from '../../../components/PageTitleBar/PageTitleBar';
 
@@ -67,11 +67,12 @@ class Clientes extends Component {
       }
     }
 
-      getContratos = () => {
+      getContratos = (clienteSelect) => {
        //        history.push(`${match.url}/contratos`); SLIDER
-
+       localStorage.setItem("clienteSelect", JSON.stringify(clienteSelect));
        const { match, history } = this.props;
         history.push(`${match.url}/contratos`);
+       
       }
 
       componentWillMount() {
@@ -141,7 +142,7 @@ class Clientes extends Component {
 
 
           
-            <RctCollapsibleCard heading="Lista Usuarios"  ><a href="javascript:void(0)" onClick={() => this.onAddClient()}><i className="ti-plus"></i></a>
+            <RctCollapsibleCard heading="Lista Usuarios" reloadable ><a href="javascript:void(0)" onClick={() => this.onAddClient()}><i className="ti-plus"></i></a>
             {loading &&
                 <div className="d-flex justify-content-center loader-overlay">
                   <CircularProgress />
@@ -166,7 +167,7 @@ class Clientes extends Component {
                   <Fragment>
                     {items.map((n, index) => {
                       return (
-                        <TableRow hover key={index} onClick={this.getContratos}>
+                        <TableRow hover key={index}  onClick={() => this.getContratos(n)}>
                          <TableCell numeric>{index}</TableCell>
                           <TableCell>{n.dni}</TableCell>
                           <TableCell>{n.name} {n.email}</TableCell>

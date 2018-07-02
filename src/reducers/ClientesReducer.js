@@ -11,7 +11,10 @@ import {
     GET_CLIENTES_SUCCES,
     ADD_CLIENTES,
     ADD_CLIENTES_SUCCES,
-    ADD_CLIENTES_FAILURE
+    ADD_CLIENTES_FAILURE,
+    UPDATE_CLIENTES,
+    UPDATE_CLIENTES_FAILURE,
+    UPDATE_CLIENTES_SUCCES
 } from '../actions/types';
 
 /**
@@ -27,6 +30,8 @@ export default (state = INIT_STATE, action) => {
 
         case GET_CLIENTES:
             return { ...state, loading: true };
+        case GET_CLIENTES_FAILURE:
+            return { ...state, loading: false };
 
         // get Client
         case GET_CLIENTES_SUCCES:
@@ -36,9 +41,10 @@ export default (state = INIT_STATE, action) => {
                 loading: false
             };
 
-        case ADD_CLIENTES:
-            return { ...state, loading: true };
-
+        case ADD_CLIENTES_FAILURE:
+            return { ...state, loading: false };
+         case GET_CLIENTES_FAILURE:
+            return { ...state, loading: false };
         // ADD Client
         case ADD_CLIENTES_SUCCES:
             return {
@@ -47,6 +53,17 @@ export default (state = INIT_STATE, action) => {
                 loading: true
             };
 
+        case UPDATE_CLIENTES:
+            return { ...state, loading: false };
+         case UPDATE_CLIENTES_FAILURE:
+            return { ...state, loading: false };
+        // ADD Client
+        case UPDATE_CLIENTES_SUCCES:
+            return {
+                ...state,
+                items: [],
+                loading: true
+            };
         default: return { ...state };
     }
 }

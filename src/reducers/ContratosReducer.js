@@ -8,7 +8,10 @@ import { NotificationManager } from 'react-notifications';
 import {
     GET_CONTRATOS,
     GET_CONTRATOS_FAILURE,
-    GET_CONTRATOS_SUCCES
+    GET_CONTRATOS_SUCCES,
+    ADD_CONTRATOS,
+    ADD_CONTRATOS_SUCCES,
+    ADD_CONTRATOS_FAILURE
 } from '../actions/types';
 
 /**
@@ -25,6 +28,8 @@ export default (state = INIT_STATE, action) => {
         case GET_CONTRATOS:
             return { ...state, loading: true };
 
+            case GET_CONTRATOS_FAILURE:
+            return { ...state, loading: false };
         // get Contratos
         case GET_CONTRATOS_SUCCES:
             return {
@@ -32,6 +37,16 @@ export default (state = INIT_STATE, action) => {
                 items: action.payload,
                 loading: false
             };
+        case ADD_CONTRATOS:
+            return { ...state, loading: true };
+
+        // get Contratos
+        case ADD_CONTRATOS_SUCCES:
+            return {
+                ...state,
+                loading: false
+            };
+
 
 
         default: return { ...state };
