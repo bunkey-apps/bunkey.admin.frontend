@@ -8,7 +8,10 @@ import { NotificationManager } from 'react-notifications';
 import {
     GET_CLIENTES,
     GET_CLIENTES_FAILURE,
-    GET_CLIENTES_SUCCES
+    GET_CLIENTES_SUCCES,
+    ADD_CLIENTES,
+    ADD_CLIENTES_SUCCES,
+    ADD_CLIENTES_FAILURE
 } from '../actions/types';
 
 /**
@@ -25,7 +28,7 @@ export default (state = INIT_STATE, action) => {
         case GET_CLIENTES:
             return { ...state, loading: true };
 
-        // get Usuarios
+        // get Client
         case GET_CLIENTES_SUCCES:
             return {
                 ...state,
@@ -33,6 +36,16 @@ export default (state = INIT_STATE, action) => {
                 loading: false
             };
 
+        case ADD_CLIENTES:
+            return { ...state, loading: true };
+
+        // ADD Client
+        case ADD_CLIENTES_SUCCES:
+            return {
+                ...state,
+                items: [],
+                loading: true
+            };
 
         default: return { ...state };
     }

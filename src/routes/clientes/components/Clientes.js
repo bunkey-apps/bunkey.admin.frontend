@@ -6,7 +6,12 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import { CircularProgress } from 'material-ui/Progress';
 import { withRouter } from 'react-router-dom';
-
+import update from 'react-addons-update';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import Button from 'material-ui/Button';
+import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle, } from 'material-ui/Dialog';
+import Snackbar from 'material-ui/Snackbar';
+import Avatar from 'material-ui/Avatar';
 
 // page title bar
 import PageTitleBar from '../../../components/PageTitleBar/PageTitleBar';
@@ -22,7 +27,8 @@ import AppConfig from '../../../constants/AppConfig';
 
   // redux action
   import {
-    getClientes
+    getClientes,
+    addClientes
   } from '../../../actions';
    
 
@@ -45,9 +51,21 @@ class Clientes extends Component {
     
     constructor() {
         super()
-        this.state = { name: {}, categories: ''};
-      
+        this.state = { 
+          addNewCustomerForm: false,
+          editCustomerModal: false,
+          editCustomer: null,
+          addNewCustomerDetails: {
+                dni: '',
+                name: '',
+                agent: '',
+                photo_url: '',
+                email: '',
+                phone: '',
+                id: ''
+            }
       }
+    }
 
       getContratos = () => {
        //        history.push(`${match.url}/contratos`); SLIDER
@@ -59,9 +77,62 @@ class Clientes extends Component {
       componentWillMount() {
         this.props.getClientes();
       }
+     
+      onAddClient() {
+        this.setState({
+            editCustomerModal: true,
+            addNewCustomerForm: true,
+            editCustomer: null,
+            addNewCustomerDetails: {
+                dni: '',
+                name: '',
+                agent: '',
+                photo_url: '',
+                email: '',
+                phone: '',
+                id: ''
+            }
+        }); 
+    }
+
+     // on change customer details
+     onChangeCustomerDetails(key, value) {
+      this.setState({
+          editCustomer: {
+              ...this.state.editCustomer,
+              [key]: value
+          }
+      });
+  }
+    // on change customer add new form value
+    onChangeCustomerAddNewForm(key, value) {
+      this.setState({
+          addNewCustomerDetails: {
+              ...this.state.addNewCustomerDetails,
+              [key]: value
+          }
+      })
+  }
+
+  // on submit add new customer form
+  onSubmitAddNewCustomerForm() {
+    const { addNewCustomerDetails } = this.state;
+    if (addNewCustomerDetails.name !== '' && addNewCustomerDetails.email !== '' && addNewCustomerDetails.phone !== '' 
+    && addNewCustomerDetails.agent !== '' && addNewCustomerDetails.dni !== '') {
+        this.setState({ editCustomerModal: false});
+        console.log('addNewCustomerDetails',addNewCustomerDetails);
+        this.props.addClientes(addNewCustomerDetails);
+        // test despues borrrar y detectar cuando responde el crear
+        setTimeout(() => {
+          this.props.getClientes();
+      }, 1000);
+        
+    }
+}
 
       render() {
         const { items, loading } = this.props;
+        const { newCustomers, sectionReload, alertDialog, editCustomerModal, addNewCustomerForm, editCustomer, snackbar, successMessage, addNewCustomerDetails } = this.state;
 
         return (       
           
@@ -70,7 +141,7 @@ class Clientes extends Component {
 
 
           
-            <RctCollapsibleCard heading="Lista Usuarios" >
+            <RctCollapsibleCard heading="Lista Usuarios"  ><a href="javascript:void(0)" onClick={() => this.onAddClient()}><i className="ti-plus"></i></a>
             {loading &&
                 <div className="d-flex justify-content-center loader-overlay">
                   <CircularProgress />
@@ -98,7 +169,7 @@ class Clientes extends Component {
                         <TableRow hover key={index} onClick={this.getContratos}>
                          <TableCell numeric>{index}</TableCell>
                           <TableCell>{n.dni}</TableCell>
-                          <TableCell>{n.name} {n.email}></TableCell>
+                          <TableCell>{n.name} {n.email}</TableCell>
                           {n.status ?  <TableCell>Activo</TableCell> : <TableCell>Pendiente</TableCell>}
 
                          <TableCell>500 GB Bitacora</TableCell>
@@ -113,8 +184,117 @@ class Clientes extends Component {
               </Table>
             </div>
           </RctCollapsibleCard>
-
+{/* Customer Edit Modal*/}
+                {editCustomerModal &&
+                    <Modal
+                        isOpen={editCustomerModal}
+                        toggle={this.toggleEditCustomerModal}
+                    >
+                        <ModalHeader toggle={this.toggleEditCustomerModal}>
+                            {addNewCustomerForm ? 'Crear Cliente' : 'Edit Customer'}
+                        </ModalHeader>
+                        <ModalBody>
+                            {addNewCustomerForm ?
+                                <Form>
+                                  <FormGroup>
+                                        <Label for="Dni">DNI</Label>
+                                        <Input
+                                            type="text"
+                                            name="dni"
+                                            id="dni"
+                                            value={addNewCustomerDetails.dni}
+                                            onChange={(e) => this.onChangeCustomerAddNewForm('dni', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="name">Nombre</Label>
+                                        <Input
+                                            type="text"
+                                            name="name"
+                                            id="name"
+                                            value={addNewCustomerDetails.name}
+                                            onChange={(e) => this.onChangeCustomerAddNewForm('name', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="agent">Agent</Label>
+                                        <Input
+                                            type="text"
+                                            name="agent"
+                                            id="agent"
+                                            value={addNewCustomerDetails.agent}
+                                            onChange={(e) => this.onChangeCustomerAddNewForm('agent', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="telefono">Telefono</Label>
+                                        <Input
+                                            type="text"
+                                            name="telefono"
+                                            id="telefno"
+                                            value={addNewCustomerDetails.phone}
+                                            onChange={(e) => this.onChangeCustomerAddNewForm('phone', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="email">Email</Label>
+                                        <Input
+                                            type="email"
+                                            name="email"
+                                            id="email"
+                                            value={addNewCustomerDetails.email}
+                                            onChange={(e) => this.onChangeCustomerAddNewForm('email', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                </Form>
+                                : <Form>
+                                    <FormGroup>
+                                        <Label for="customerId">Id</Label>
+                                        <Input
+                                            type="text"
+                                            name="name"
+                                            id="customerId"
+                                            defaultValue={editCustomer.customer_id}
+                                            readOnly
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="customerName">Name</Label>
+                                        <Input
+                                            type="text"
+                                            name="name"
+                                            id="customerName"
+                                            value={editCustomer.customer_name}
+                                            onChange={(e) => this.onChangeCustomerDetails('customer_name', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="customerEmail">Email</Label>
+                                        <Input
+                                            type="email"
+                                            name="email"
+                                            id="customerEmail"
+                                            value={editCustomer.customer_email}
+                                            onChange={(e) => this.onChangeCustomerDetails('customer_email', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                </Form>
+                            }
+                        </ModalBody>
+                        <ModalFooter>
+                            {addNewCustomerForm ?
+                                <div>
+                                    <Button variant="raised" className="btn-primary text-white" onClick={() => this.onSubmitAddNewCustomerForm()}><IntlMessages id="button.add" /></Button>{' '}
+                                    <Button variant="raised" className="btn-danger text-white" onClick={this.toggleEditCustomerModal}><IntlMessages id="button.cancel" /></Button>
+                                </div>
+                                : <div><Button variant="raised" className="btn-primary text-white" onClick={() => this.onSubmitCustomerEditDetailForm()}><IntlMessages id="button.update" /></Button>{' '}
+                                    <Button variant="raised" className="btn-danger text-white" onClick={this.toggleEditCustomerModal}><IntlMessages id="button.cancel" /></Button></div>
+                            }
+                        </ModalFooter>
+                    </Modal>
+                }
           </div>
+          
         )
       }
     }
@@ -125,5 +305,5 @@ const mapStateToProps = ({ clientes }) => {
   }
   
   export default withRouter(connect(mapStateToProps, {
-    getClientes
+    getClientes,addClientes
   })(Clientes));

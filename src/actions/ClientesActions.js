@@ -5,7 +5,10 @@ import axios from 'axios';
 import {
     GET_CLIENTES,
     GET_CLIENTES_FAILURE,
-    GET_CLIENTES_SUCCES
+    GET_CLIENTES_SUCCES,
+    ADD_CLIENTES,
+    ADD_CLIENTES_FAILURE,
+    ADD_CLIENTES_SUCCES
 } from './types';
 
 // app config
@@ -16,7 +19,7 @@ import AppConfig from '../constants/AppConfig';
 
 
 /**
- * Redux Action To Get Contratos
+ * Redux Action To Get Clientes
  */
 export const getClientes = () => (dispatch) => {
     dispatch({ type: GET_CLIENTES });
@@ -26,7 +29,7 @@ export const getClientes = () => (dispatch) => {
 
     console.log('tokenJson4',tokenJson.accessToken);
     var instance2 = axios.create({
-        baseURL: 'https://private-anon-29819f91c9-bunkeyapigateway.apiary-mock.com/',
+        baseURL: 'http://dev-api.bunkey.aureolab.cl/',
         timeout: 3000,
         headers: {'Content-Type': 'application/json','Authorization': 'Bearer ' + tokenJson.accessToken}
       });
@@ -35,6 +38,46 @@ export const getClientes = () => (dispatch) => {
         .then((response) => {
             console.log('response clients2',response);
             dispatch({ type: GET_CLIENTES_SUCCES, payload: response.data });
+        })
+        .catch(error => {
+            // error handling
+        })
+}
+
+
+
+/**
+ * Redux Action To ADD Clientes
+ */
+export const addClientes = (client) => (dispatch) => {
+    console.log('client FORM',client);
+    dispatch({ type: ADD_CLIENTES });
+    const token = localStorage.getItem('user_id');
+
+    const tokenJson = JSON.parse(token);
+
+    console.log('tokenJson4',tokenJson.accessToken);
+    var instance2 = axios.create({
+        baseURL: 'http://dev-api.bunkey.aureolab.cl/',
+        timeout: 3000,
+        headers: {'Content-Type': 'application/json','Authorization': 'Bearer ' + tokenJson.accessToken}
+      });
+   
+    instance2.post('v1/admin/clients',{
+        dni: client.dni,
+        name: client.name,
+        agent: client.agent,
+        email: client.email,
+        phone: client.phone,
+        acountSetting: {
+            logo: 'https://vignette.wikia.nocookie.net/gameofthrones/images/e/ed/Night%27s-Watch-Main-Shield.PNG',
+            background: 'https://vignette.wikia.nocookie.net/gameofthrones/images/7/7b/Castle_Black.jpg',
+            language: 'es'
+        }
+    })
+        .then((response) => {
+            console.log('response clients2',response);
+            dispatch({ type: ADD_CLIENTES_SUCCES, payload: response.data });
         })
         .catch(error => {
             // error handling
