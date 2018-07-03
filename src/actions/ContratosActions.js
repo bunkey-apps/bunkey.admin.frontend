@@ -12,7 +12,10 @@ import {
     ADD_CONTRATOS_FAILURE,
     UPDATE_CONTRATOS,
     UPDATE_CONTRATOS_SUCCES,
-    UPDATE_CONTRATOS_FAILURE
+    UPDATE_CONTRATOS_FAILURE,
+    DELETE_CONTRATOS,
+    DELETE_CONTRATOS_SUCCES,
+    DELETE_CONTRATOS_FAILURE
 } from './types';
 
 // app config
@@ -128,5 +131,35 @@ export const updateContrato = (contrato) => (dispatch) => {
         })
         .catch(error => {
             // error handling
+        })
+}
+
+/**
+ * Redux Action To Delete Clientes
+ */
+export const deleteContrato = (contrato) => (dispatch) => {
+    console.log('delete FORM',contrato);
+    dispatch({ type: DELETE_CONTRATOS });
+    const token = localStorage.getItem('user_id');
+
+    const tokenJson = JSON.parse(token);
+
+    console.log('tokenJson4',tokenJson.accessToken);
+
+  
+    var instance2 = axios.create({
+        baseURL: 'http://dev-api.bunkey.aureolab.cl/',
+        timeout: 3000,
+        headers: {'Content-Type': 'application/json','Authorization': 'Bearer ' + tokenJson.accessToken}
+      });
+   
+    instance2.delete('v1/admin/contracts/' + contrato._id)
+        .then((response) => {
+            console.log('response contracts',response);
+            dispatch({ type: DELETE_CONTRATOS_SUCCES});
+        })
+        .catch(error => {
+            // error handling
+            dispatch({ type: DELETE_CONTRATOS_FAILURE});
         })
 }

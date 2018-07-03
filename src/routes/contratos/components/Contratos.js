@@ -29,7 +29,8 @@ import AppConfig from '../../../constants/AppConfig';
   import {
     getContratos,
     addContrato,
-    updateContrato
+    updateContrato,
+    deleteContrato
   } from '../../../actions';
    
 
@@ -162,8 +163,24 @@ toggleEditCustomerModal = () => {
     });
 }
 
+onDeleteCustomer(customer) {
+    this.setState({ alertDialog: true, selectedDeletedCustomer: customer });
+}
 
-
+deleteCustomer() {
+    this.setState({ alertDialog: false});
+   
+    console.log('this.state.selectedDeletedCustomer',this.state.selectedDeletedCustomer);
+    this.props.deleteContrato(this.state.selectedDeletedCustomer);
+    // test despues borrrar y detectar cuando responde el crear
+    setTimeout(() => {
+      this.props.getContratos();
+  }, 1000);
+}
+handleClose = () => {
+    console.log('handleClose');
+  this.setState({ alertDialog: false });
+}
       render() {
         const { items, loading } = this.props;
         const { newCustomers, sectionReload, alertDialog, editCustomerModal, addNewCustomerForm, editCustomer, snackbar, successMessage, addNewCustomerDetails } = this.state;
@@ -229,6 +246,26 @@ toggleEditCustomerModal = () => {
               </Table>
             </div>
           </RctCollapsibleCard>
+
+          <Dialog
+                    open={alertDialog}
+                    onClose={this.handleClose}
+                >
+                    <DialogTitle>{"Estas seguro de eliminarlo?"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                           Estas seguro de eliminarlo de forma permanente.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="raised"  onClick={this.handleClose} className="btn-danger text-white">
+                            <IntlMessages id="button.cancel" />
+                        </Button>
+                        <Button variant="raised" onClick={() => this.deleteCustomer()} className="btn-primary text-white" autoFocus>
+                            <IntlMessages id="button.yes" />
+                        </Button>
+                    </DialogActions>
+                </Dialog>
 {/* Customer Edit Modal*/}
                 {editCustomerModal &&
                     <Modal
@@ -410,5 +447,5 @@ const mapStateToProps = ({ contratos }) => {
   }
   
   export default withRouter(connect(mapStateToProps, {
-    getContratos,addContrato,updateContrato
+    getContratos,addContrato,updateContrato, deleteContrato
   })(Contratos));
