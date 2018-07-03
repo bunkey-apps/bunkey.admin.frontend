@@ -96,7 +96,7 @@ export const addClientes = (client) => (dispatch) => {
  * Redux Action To Update Clientes
  */
 export const updateClientes = (client) => (dispatch) => {
-    console.log('client FORM',client);
+    console.log('update FORM',client);
     dispatch({ type: UPDATE_CLIENTES });
     const token = localStorage.getItem('user_id');
 
@@ -104,16 +104,14 @@ export const updateClientes = (client) => (dispatch) => {
 
     console.log('tokenJson4',tokenJson.accessToken);
 
-    const clienteSelect = localStorage.getItem('clienteSelect');
-    const clienteSelectJson = JSON.parse(clienteSelect);
-    console.log('clienteSelect',clienteSelect);
+  
     var instance2 = axios.create({
         baseURL: 'http://dev-api.bunkey.aureolab.cl/',
         timeout: 3000,
         headers: {'Content-Type': 'application/json','Authorization': 'Bearer ' + tokenJson.accessToken}
       });
    
-    instance2.put('v1/admin/clients/' + clienteSelectJson._id,{
+    instance2.put('v1/admin/clients/' + client._id,{
         dni: client.dni,
         name: client.name,
         agent: client.agent,

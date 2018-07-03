@@ -28,7 +28,8 @@ import AppConfig from '../../../constants/AppConfig';
   // redux action
   import {
     getClientes,
-    addClientes
+    addClientes,
+    updateClientes
   } from '../../../actions';
    
 
@@ -115,6 +116,16 @@ class Clientes extends Component {
       })
   }
 
+  // close alert
+  handleClose = () => {
+    this.setState({ alertDialog: false });
+}
+
+// edit customer
+onEditCustomer(customer) {
+    this.setState({ editCustomerModal: true, editCustomer: customer, addNewCustomerForm: false });
+}
+
   // on submit add new customer form
   onSubmitAddNewCustomerForm() {
     const { addNewCustomerDetails } = this.state;
@@ -130,6 +141,26 @@ class Clientes extends Component {
         
     }
 }
+
+
+onSubmitCustomerEditDetailForm() {
+    const { editCustomer } = this.state;
+    if (editCustomer.name !== '' && editCustomer.email !== '' && editCustomer.phone !== '' 
+    && editCustomer.agent !== '' && editCustomer.dni !== '') {
+        this.setState({ editCustomerModal: false});
+        console.log('editCustomer',editCustomer);
+        
+        this.props.updateClientes(editCustomer);
+        // test despues borrrar y detectar cuando responde el crear
+        setTimeout(() => {
+          this.props.getClientes();
+      }, 1000);
+        
+    }
+}
+
+
+
 
       render() {
         const { items, loading } = this.props;
@@ -167,16 +198,23 @@ class Clientes extends Component {
                   <Fragment>
                     {items.map((n, index) => {
                       return (
-                        <TableRow hover key={index}  onClick={() => this.getContratos(n)}>
-                         <TableCell numeric>{index}</TableCell>
-                          <TableCell>{n.dni}</TableCell>
-                          <TableCell>{n.name} {n.email}</TableCell>
-                          {n.status ?  <TableCell>Activo</TableCell> : <TableCell>Pendiente</TableCell>}
+                        <TableRow hover key={index} >
+                         <TableCell numeric  onClick={() => this.getContratos(n)}>{index}</TableCell>
+                          <TableCell  onClick={() => this.getContratos(n)}>{n.dni}</TableCell>
+                          <TableCell  onClick={() => this.getContratos(n)}>{n.name} {n.email}</TableCell>
+                          {n.status ?  <TableCell  onClick={() => this.getContratos(n)}>Activo</TableCell> : <TableCell>Pendiente</TableCell>}
 
-                         <TableCell>500 GB Bitacora</TableCell>
-                          <TableCell>$800.000</TableCell>
-                          <TableCell>5Usuarios</TableCell>
-                          <TableCell></TableCell>
+                         <TableCell  onClick={() => this.getContratos(n)}>500 GB Bitacora</TableCell>
+                          <TableCell  onClick={() => this.getContratos(n)}>$800.000</TableCell>
+                          <TableCell  onClick={() => this.getContratos(n)}>5Usuarios</TableCell>
+                          <TableCell>
+                      
+                                    <a href="javascript:void(0)"  onClick={() => this.onEditCustomer(n)}>
+                                        <i className="zmdi zmdi-edit"></i>
+                                    </a>
+                                  
+
+                          </TableCell>
                         </TableRow>
                       );
                     })}
@@ -250,33 +288,53 @@ class Clientes extends Component {
                                 </Form>
                                 : <Form>
                                     <FormGroup>
-                                        <Label for="customerId">Id</Label>
+                                        <Label for="Dni">DNI</Label>
                                         <Input
                                             type="text"
-                                            name="name"
-                                            id="customerId"
-                                            defaultValue={editCustomer.customer_id}
-                                            readOnly
+                                            name="dni"
+                                            id="dni"
+                                            value={editCustomer.dni}
+                                            onChange={(e) => this.onChangeCustomerDetails('dni', e.target.value)}
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="customerName">Name</Label>
+                                        <Label for="name">Nombre</Label>
                                         <Input
                                             type="text"
                                             name="name"
-                                            id="customerName"
-                                            value={editCustomer.customer_name}
-                                            onChange={(e) => this.onChangeCustomerDetails('customer_name', e.target.value)}
+                                            id="name"
+                                            value={editCustomer.name}
+                                            onChange={(e) => this.onChangeCustomerDetails('name', e.target.value)}
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="customerEmail">Email</Label>
+                                        <Label for="agent">Agent</Label>
+                                        <Input
+                                            type="text"
+                                            name="agent"
+                                            id="agent"
+                                            value={editCustomer.agent}
+                                            onChange={(e) => this.onChangeCustomerDetails('agent', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="telefono">Telefono</Label>
+                                        <Input
+                                            type="text"
+                                            name="telefono"
+                                            id="telefno"
+                                            value={editCustomer.phone}
+                                            onChange={(e) => this.onChangeCustomerDetails('phone', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="email">Email</Label>
                                         <Input
                                             type="email"
                                             name="email"
-                                            id="customerEmail"
-                                            value={editCustomer.customer_email}
-                                            onChange={(e) => this.onChangeCustomerDetails('customer_email', e.target.value)}
+                                            id="email"
+                                            value={editCustomer.email}
+                                            onChange={(e) => this.onChangeCustomerDetails('email', e.target.value)}
                                         />
                                     </FormGroup>
                                 </Form>
@@ -306,5 +364,5 @@ const mapStateToProps = ({ clientes }) => {
   }
   
   export default withRouter(connect(mapStateToProps, {
-    getClientes,addClientes
+    getClientes,addClientes,updateClientes
   })(Clientes));
