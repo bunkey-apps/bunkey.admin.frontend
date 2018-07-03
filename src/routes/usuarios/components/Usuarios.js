@@ -5,7 +5,13 @@ import IconButton from 'material-ui/IconButton';
 import axios from 'axios';
 import { connect } from "react-redux";
 import { CircularProgress } from 'material-ui/Progress';
-
+import update from 'react-addons-update';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import Button from 'material-ui/Button';
+import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle, } from 'material-ui/Dialog';
+import Snackbar from 'material-ui/Snackbar';
+import Avatar from 'material-ui/Avatar';
+import moment from 'moment';
 // page title bar
 import PageTitleBar from '../../../components/PageTitleBar/PageTitleBar';
 
@@ -20,7 +26,10 @@ import AppConfig from '../../../constants/AppConfig';
 
   // redux action
   import {
-    getUsuarios
+    getUsuarios,
+    addUsuario,
+    deleteUsuario,
+    updateUsuario
   } from '../../../actions';
    
 
@@ -43,7 +52,21 @@ class Usuarios extends Component {
     
     constructor() {
         super()
-        this.state = { name: {}, categories: ''};
+        this.state = { 
+          addNewCustomerForm: false,
+          editCustomerModal: false,
+          editCustomer: null,
+          selectedDeletedCustomer: null,
+          alertDialog: false,
+          addNewCustomerDetails: {
+                email: '',
+                password: '',
+                name: '',
+                role: '',
+                workspace: '',
+                clietntOwner: ''
+            }
+      }
       
       }
 
@@ -51,8 +74,108 @@ class Usuarios extends Component {
         this.props.getUsuarios();
       }
 
+      onAddUsuario() {
+        this.setState({
+            editCustomerModal: true,
+            addNewCustomerForm: true,
+            editCustomer: null,
+            addNewCustomerDetails: {
+                email: '',
+                password: '',
+                name: '',
+                role: '',
+                workspace: '',
+                clietntOwner: ''
+            }
+        }); 
+    }
+
+    onChangeCustomerAddNewForm(key, value) {
+      this.setState({
+          addNewCustomerDetails: {
+              ...this.state.addNewCustomerDetails,
+              [key]: value
+          }
+      })
+  }
+
+  onSubmitAddNewCustomerForm() {
+    const { addNewCustomerDetails } = this.state;
+    if (addNewCustomerDetails.email !== '' && addNewCustomerDetails.password !== '' && addNewCustomerDetails.name !== '' 
+    && addNewCustomerDetails.role !== '') {
+        this.setState({ editCustomerModal: false});
+        console.log('addNewCustomerDetails',addNewCustomerDetails);
+        this.props.addUsuario(addNewCustomerDetails);
+        // test despues borrrar y detectar cuando responde el crear
+        setTimeout(() => {
+          this.props.getUsuarios();
+      }, 1000);
+        
+    }
+}
+
+onSubmitCustomerEditDetailForm() {
+  const { editCustomer } = this.state;
+  if (editCustomer.email !== '' && editCustomer.password !== '' && editCustomer.name !== '' 
+  && editCustomer.role !== '') {
+      this.setState({ editCustomerModal: false});
+      console.log('editCustomer',editCustomer);
+      
+      this.props.updateUsuario(editCustomer);
+      // test despues borrrar y detectar cuando responde el crear
+      setTimeout(() => {
+        this.props.getUsuarios();
+    }, 1000);
+      
+  }
+}
+
+toggleEditCustomerModal = () => {
+  this.setState({
+      editCustomerModal: !this.state.editCustomerModal
+  });
+}
+
+onChangeCustomerDetails(key, value) {
+  this.setState({
+      editCustomer: {
+          ...this.state.editCustomer,
+          [key]: value
+      }
+  });
+}
+
+// close alert
+handleClose = () => {
+  console.log('handleClose');
+this.setState({ alertDialog: false });
+}
+
+// edit customer
+onEditCustomer(customer) {
+this.setState({ editCustomerModal: true, editCustomer: customer, addNewCustomerForm: false });
+}
+
+// on delete customer
+onDeleteCustomer(customer) {
+this.setState({ alertDialog: true, selectedDeletedCustomer: customer });
+}
+
+// delete customer
+deleteCustomer() {
+  this.setState({ alertDialog: false});
+ 
+  console.log('this.state.selectedDeletedCustomer',this.state.selectedDeletedCustomer);
+  this.props.deleteUsuario(this.state.selectedDeletedCustomer);
+  // test despues borrrar y detectar cuando responde el crear
+  setTimeout(() => {
+    this.props.getUsuarios();
+}, 1000);
+}
+
       render() {
         const { items, loading } = this.props;
+        const { newCustomers, sectionReload, alertDialog, editCustomerModal, addNewCustomerForm, editCustomer, snackbar, successMessage, addNewCustomerDetails } = this.state;
 
         return (       
           
@@ -62,6 +185,8 @@ class Usuarios extends Component {
 
           
             <RctCollapsibleCard heading="Lista Usuarios" fullBlock>
+            <a href="javascript:void(0)" onClick={() => this.onAddUsuario()}><i className="ti-plus"></i></a>
+
             {loading &&
                 <div className="d-flex justify-content-center loader-overlay">
                   <CircularProgress />
@@ -92,7 +217,20 @@ class Usuarios extends Component {
 
                          
                           <TableCell>{n.role}</TableCell>
-                          <TableCell></TableCell>
+                          <TableCell>
+                          <div className="row">
+                          <div className="col-md-6">
+                          <a href="javascript:void(0)"  onClick={() => this.onEditCustomer(n)}>
+                                        <i className="zmdi zmdi-edit"></i>
+                                    </a>
+                          </div>
+                          <div className="col-md-6">
+                          <a href="javascript:void(0)"   onClick={() => this.onDeleteCustomer(n)}>
+                                        <i className="zmdi zmdi-delete"></i>
+                                    </a>
+                          </div>
+                          </div>
+                          </TableCell>
                         </TableRow>
                       );
                     })}
@@ -101,6 +239,132 @@ class Usuarios extends Component {
               </Table>
             </div>
           </RctCollapsibleCard>
+
+
+
+<Dialog
+                    open={alertDialog}
+                    onClose={this.handleClose}
+                >
+                    <DialogTitle>{"Estas seguro de eliminarlo?"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                           Estas seguro de eliminarlo de forma permanente.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="raised"  onClick={this.handleClose} className="btn-danger text-white">
+                            <IntlMessages id="button.cancel" />
+                        </Button>
+                        <Button variant="raised" onClick={() => this.deleteCustomer()} className="btn-primary text-white" autoFocus>
+                            <IntlMessages id="button.yes" />
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+{/* Customer Edit Modal*/}
+                {editCustomerModal &&
+                    <Modal
+                        isOpen={editCustomerModal}
+                        toggle={this.toggleEditCustomerModal}
+                    >
+                        <ModalHeader toggle={this.toggleEditCustomerModal}>
+                            {addNewCustomerForm ? 'Crear Usuario' : 'Editar Usuario'}
+                        </ModalHeader>
+                        <ModalBody>
+                            {addNewCustomerForm ?
+                                <Form>
+                                  <FormGroup>
+                                        <Label for="email">email</Label>
+                                        <Input
+                                            type="email"
+                                            name="email"
+                                            id="email"
+                                            value={addNewCustomerDetails.email}
+                                            onChange={(e) => this.onChangeCustomerAddNewForm('email', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="name">password</Label>
+                                        <Input
+                                            type="password"
+                                            name="password"
+                                            id="password"
+                                            value={addNewCustomerDetails.password}
+                                            onChange={(e) => this.onChangeCustomerAddNewForm('password', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="name">name</Label>
+                                        <Input
+                                            type="text"
+                                            name="name"
+                                            id="name"
+                                            value={addNewCustomerDetails.name}
+                                            onChange={(e) => this.onChangeCustomerAddNewForm('name', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="telefono">role</Label>
+                                        <Input
+                                            type="text"
+                                            name="role"
+                                            id="role"
+                                            value={addNewCustomerDetails.role}
+                                            onChange={(e) => this.onChangeCustomerAddNewForm('role', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                   
+                                </Form>
+                                : <Form>
+                                    <FormGroup>
+                                        <Label for="email">email</Label>
+                                        <Input
+                                            type="email"
+                                            name="email"
+                                            id="email"
+                                            value={editCustomer.email}
+                                            onChange={(e) => this.onChangeCustomerDetails('email', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                   
+                                    <FormGroup>
+                                        <Label for="name">name</Label>
+                                        <Input
+                                            type="text"
+                                            name="name"
+                                            id="name"
+                                            value={editCustomer.name}
+                                            onChange={(e) => this.onChangeCustomerDetails('name', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="telefono">role</Label>
+                                        <Input
+                                            type="text"
+                                            name="role"
+                                            id="role"
+                                            value={editCustomer.role}
+                                            onChange={(e) => this.onChangeCustomerDetails('role', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                </Form>
+                            }
+                        </ModalBody>
+                        <ModalFooter>
+                            {addNewCustomerForm ?
+                                <div>
+                                    <Button variant="raised" className="btn-primary text-white" onClick={() => this.onSubmitAddNewCustomerForm()}><IntlMessages id="button.add" /></Button>{' '}
+                                    <Button variant="raised" className="btn-danger text-white" onClick={this.toggleEditCustomerModal}><IntlMessages id="button.cancel" /></Button>
+                                </div>
+                                : <div><Button variant="raised" className="btn-primary text-white" onClick={() => this.onSubmitCustomerEditDetailForm()}><IntlMessages id="button.update" /></Button>{' '}
+                                    <Button variant="raised" className="btn-danger text-white" onClick={this.toggleEditCustomerModal}><IntlMessages id="button.cancel" /></Button></div>
+                            }
+                        </ModalFooter>
+                    </Modal>
+                }
+
+
+
 
           </div>
         )
@@ -113,5 +377,5 @@ const mapStateToProps = ({ usuarios }) => {
   }
   
   export default connect(mapStateToProps, {
-    getUsuarios
+    getUsuarios,addUsuario,deleteUsuario,updateUsuario
   })(Usuarios);

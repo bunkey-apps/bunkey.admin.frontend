@@ -44,7 +44,7 @@ export default (state = INIT_STATE, action) => {
                 loading: false
             };
 
-        case ADD_CLIENTES_FAILURE:
+        case ADD_CLIENTES:
             return { ...state, loading: false };
          case GET_CLIENTES_FAILURE:
             return { ...state, loading: false };

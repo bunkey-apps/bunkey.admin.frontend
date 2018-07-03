@@ -199,7 +199,8 @@ toggleEditCustomerModal = () => {
 
 
           
-            <RctCollapsibleCard heading="Lista Clientes" reloadable ><a href="javascript:void(0)" onClick={() => this.onAddClient()}><i className="ti-plus"></i></a>
+            <RctCollapsibleCard heading="Lista Clientes" reloadable >
+            <a href="javascript:void(0)" onClick={() => this.onAddClient()}><i className="ti-plus"></i></a>
             {loading &&
                 <div className="d-flex justify-content-center loader-overlay">
                   <CircularProgress />
