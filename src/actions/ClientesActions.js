@@ -11,7 +11,10 @@ import {
     ADD_CLIENTES_SUCCES,
     UPDATE_CLIENTES,
     UPDATE_CLIENTES_FAILURE,
-    UPDATE_CLIENTES_SUCCES
+    UPDATE_CLIENTES_SUCCES,
+    DELETE_CLIENTES,
+    DELETE_CLIENTES_FAILURE,
+    DELETE_CLIENTES_SUCCES
 } from './types';
 
 // app config
@@ -130,5 +133,36 @@ export const updateClientes = (client) => (dispatch) => {
         .catch(error => {
             // error handling
             dispatch({ type: UPDATE_CLIENTES_FAILURE});
+        })
+}
+
+
+/**
+ * Redux Action To Delete Clientes
+ */
+export const daleteClientes = (client) => (dispatch) => {
+    console.log('delete FORM',client);
+    dispatch({ type: DELETE_CLIENTES });
+    const token = localStorage.getItem('user_id');
+
+    const tokenJson = JSON.parse(token);
+
+    console.log('tokenJson4',tokenJson.accessToken);
+
+  
+    var instance2 = axios.create({
+        baseURL: 'http://dev-api.bunkey.aureolab.cl/',
+        timeout: 3000,
+        headers: {'Content-Type': 'application/json','Authorization': 'Bearer ' + tokenJson.accessToken}
+      });
+   
+    instance2.delete('v1/admin/clients/' + client._id)
+        .then((response) => {
+            console.log('response clients2',response);
+            dispatch({ type: DELETE_CLIENTES_SUCCES});
+        })
+        .catch(error => {
+            // error handling
+            dispatch({ type: DELETE_CLIENTES_FAILURE});
         })
 }

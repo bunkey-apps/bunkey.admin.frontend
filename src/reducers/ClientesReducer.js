@@ -14,7 +14,10 @@ import {
     ADD_CLIENTES_FAILURE,
     UPDATE_CLIENTES,
     UPDATE_CLIENTES_FAILURE,
-    UPDATE_CLIENTES_SUCCES
+    UPDATE_CLIENTES_SUCCES,
+    DELETE_CLIENTES,
+    DELETE_CLIENTES_FAILURE,
+    DELETE_CLIENTES_SUCCES
 } from '../actions/types';
 
 /**
@@ -62,6 +65,17 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 items: [],
+                loading: true
+            };
+
+            case DELETE_CLIENTES:
+            return { ...state, loading: false };
+         case DELETE_CLIENTES_FAILURE:
+            return { ...state, loading: false };
+        // ADD Client
+        case DELETE_CLIENTES_SUCCES:
+            return {
+                ...state,
                 loading: true
             };
         default: return { ...state };

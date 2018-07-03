@@ -29,7 +29,8 @@ import AppConfig from '../../../constants/AppConfig';
   import {
     getClientes,
     addClientes,
-    updateClientes
+    updateClientes,
+    daleteClientes
   } from '../../../actions';
    
 
@@ -56,6 +57,8 @@ class Clientes extends Component {
           addNewCustomerForm: false,
           editCustomerModal: false,
           editCustomer: null,
+          selectedDeletedCustomer: null,
+          alertDialog: false,
           addNewCustomerDetails: {
                 dni: '',
                 name: '',
@@ -125,6 +128,24 @@ class Clientes extends Component {
 onEditCustomer(customer) {
     this.setState({ editCustomerModal: true, editCustomer: customer, addNewCustomerForm: false });
 }
+
+ // on delete customer
+ onDeleteCustomer(customer) {
+    this.setState({ alertDialog: true, selectedDeletedCustomer: customer });
+}
+
+ // delete customer
+ deleteCustomer() {
+    this.setState({ alertDialog: false});
+   
+    console.log('this.state.selectedDeletedCustomer',this.state.selectedDeletedCustomer);
+    this.props.daleteClientes(this.state.selectedDeletedCustomer);
+    // test despues borrrar y detectar cuando responde el crear
+    setTimeout(() => {
+      this.props.getClientes();
+  }, 1000);
+}
+
 
   // on submit add new customer form
   onSubmitAddNewCustomerForm() {
@@ -208,11 +229,20 @@ onSubmitCustomerEditDetailForm() {
                           <TableCell  onClick={() => this.getContratos(n)}>$800.000</TableCell>
                           <TableCell  onClick={() => this.getContratos(n)}>5Usuarios</TableCell>
                           <TableCell>
-                      
-                                    <a href="javascript:void(0)"  onClick={() => this.onEditCustomer(n)}>
+                          <div className="row">
+                          <div className="col-md-6">
+                          <a href="javascript:void(0)"  onClick={() => this.onEditCustomer(n)}>
                                         <i className="zmdi zmdi-edit"></i>
                                     </a>
-                                  
+                          </div>
+                          <div className="col-md-6">
+                          <a href="javascript:void(0)"   onClick={() => this.onDeleteCustomer(n)}>
+                                        <i className="zmdi zmdi-delete"></i>
+                                    </a>
+                          </div>
+                          </div>
+                                    
+                                   
 
                           </TableCell>
                         </TableRow>
@@ -223,6 +253,25 @@ onSubmitCustomerEditDetailForm() {
               </Table>
             </div>
           </RctCollapsibleCard>
+          <Dialog
+                    open={alertDialog}
+                    onClose={this.handleClose}
+                >
+                    <DialogTitle>{"Are You Sure Want To Delete?"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Are You Sure Want To Delete Permanently This Customer.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="raised" onClick={this.handleClose} className="btn-danger text-white">
+                            <IntlMessages id="button.cancel" />
+                        </Button>
+                        <Button variant="raised" onClick={() => this.deleteCustomer()} className="btn-primary text-white" autoFocus>
+                            <IntlMessages id="button.yes" />
+                        </Button>
+                    </DialogActions>
+                </Dialog>
 {/* Customer Edit Modal*/}
                 {editCustomerModal &&
                     <Modal
@@ -364,5 +413,5 @@ const mapStateToProps = ({ clientes }) => {
   }
   
   export default withRouter(connect(mapStateToProps, {
-    getClientes,addClientes,updateClientes
+    getClientes,addClientes,updateClientes,daleteClientes
   })(Clientes));

@@ -34,8 +34,7 @@ export const getContratos = () => (dispatch) => {
         timeout: 3000,
         headers: {'Content-Type': 'application/json','Authorization': 'Bearer ' + tokenJson.accessToken}
       });
-   
-    instance2.get('v1/admin/contracts/' + clienteSelectJson._id)
+    instance2.get('v1/admin/clients/' + clienteSelectJson._id + '/contracts')
         .then((response) => {
             console.log('response contratos',response);
             dispatch({ type: GET_CONTRATOS_SUCCES, payload: response.data });
