@@ -45,7 +45,7 @@ class UsuariosPage extends Component {
         <div className="dashboard-v1">
             <div className="page-title d-sm-flex justify-content-between align-items-center">
                     <div className="page-title-wrap">
-                        <h2 className="">Lista de Usuarios2</h2>
+                        <h2 className="">Lista de Usuarios</h2>
                     </div>
             </div>
 
