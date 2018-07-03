@@ -152,12 +152,10 @@ class Contratos extends Component {
                 <TableHead>
                   <TableRow hover>
                     <TableCell numeric>#</TableCell>
-                    <TableCell>Nombre DNI</TableCell>
-                    <TableCell>Datos Contacto</TableCell>
+                    <TableCell>Tamaño Total</TableCell>
                     <TableCell>Estado</TableCell>
-                    <TableCell>Saldo Atrasado</TableCell>
-                    <TableCell>Tamaño Ocupado</TableCell>
-                    <TableCell>Usuarios</TableCell>
+                    <TableCell>Monto</TableCell>
+                    <TableCell>Pagado</TableCell>
                     <TableCell>Acciones</TableCell>
                   </TableRow>
                 </TableHead>
@@ -167,13 +165,10 @@ class Contratos extends Component {
                       return (
                         <TableRow hover key={index}>
                          <TableCell numeric>{index}</TableCell>
-                          <TableCell>{n.dni}</TableCell>
-                          <TableCell>{n.name} {n.email}</TableCell>
-                          {n.status ?  <TableCell>Activo</TableCell> : <TableCell>Pendiente</TableCell>}
-
-                         <TableCell>500 GB Bitacora</TableCell>
-                          <TableCell>$800.000</TableCell>
-                          <TableCell>5Usuarios</TableCell>
+                         <TableCell>{n.plan.sizeTotal}</TableCell>
+                          <TableCell>Pendiente</TableCell>
+                          <TableCell>${n.monthlyPaymentDay}</TableCell>
+                          <TableCell>Atrasado</TableCell>
                           <TableCell></TableCell>
                         </TableRow>
                       );

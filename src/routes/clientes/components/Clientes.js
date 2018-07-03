@@ -121,6 +121,7 @@ class Clientes extends Component {
 
   // close alert
   handleClose = () => {
+      console.log('handleClose');
     this.setState({ alertDialog: false });
 }
 
@@ -181,7 +182,11 @@ onSubmitCustomerEditDetailForm() {
 }
 
 
-
+toggleEditCustomerModal = () => {
+    this.setState({
+        editCustomerModal: !this.state.editCustomerModal
+    });
+}
 
       render() {
         const { items, loading } = this.props;
@@ -257,14 +262,14 @@ onSubmitCustomerEditDetailForm() {
                     open={alertDialog}
                     onClose={this.handleClose}
                 >
-                    <DialogTitle>{"Are You Sure Want To Delete?"}</DialogTitle>
+                    <DialogTitle>{"Estas seguro de eliminarlo?"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Are You Sure Want To Delete Permanently This Customer.
+                           Estas seguro de eliminarlo de forma permanente.
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button variant="raised" onClick={this.handleClose} className="btn-danger text-white">
+                        <Button variant="raised"  onClick={this.handleClose} className="btn-danger text-white">
                             <IntlMessages id="button.cancel" />
                         </Button>
                         <Button variant="raised" onClick={() => this.deleteCustomer()} className="btn-primary text-white" autoFocus>
@@ -279,7 +284,7 @@ onSubmitCustomerEditDetailForm() {
                         toggle={this.toggleEditCustomerModal}
                     >
                         <ModalHeader toggle={this.toggleEditCustomerModal}>
-                            {addNewCustomerForm ? 'Crear Cliente' : 'Edit Customer'}
+                            {addNewCustomerForm ? 'Crear Cliente' : 'Editar Cliente'}
                         </ModalHeader>
                         <ModalBody>
                             {addNewCustomerForm ?
