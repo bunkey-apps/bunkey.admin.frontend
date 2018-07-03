@@ -12,7 +12,7 @@ import Button from 'material-ui/Button';
 import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle, } from 'material-ui/Dialog';
 import Snackbar from 'material-ui/Snackbar';
 import Avatar from 'material-ui/Avatar';
-
+import moment from 'moment';
 // page title bar
 import PageTitleBar from '../../../components/PageTitleBar/PageTitleBar';
 
@@ -28,7 +28,8 @@ import AppConfig from '../../../constants/AppConfig';
   // redux action
   import {
     getContratos,
-    addContrato
+    addContrato,
+    updateContrato
   } from '../../../actions';
    
 
@@ -55,6 +56,8 @@ class Contratos extends Component {
           addNewCustomerForm: false,
           editCustomerModal: false,
           editCustomer: null,
+          selectedDeletedCustomer: null,
+          alertDialog: false,
           addNewCustomerDetails: {
                 client: '',
                 monthlyPaymentDay: '',
@@ -129,6 +132,38 @@ class Contratos extends Component {
     }
 }
 
+onSubmitCustomerEditDetailForm() {
+    const { editCustomer } = this.state;
+    console.log('editCustomer',editCustomer);
+    if (editCustomer.monthlyPaymentDay !== '' && editCustomer.monthlyCost !== '' && editCustomer.startDate !== '' 
+    && editCustomer.endDate !== '' && editCustomer.sizeTotal !== ''  && editCustomer.sizeVideoRow !== ''
+    && editCustomer.sizeVideoFinal !== '') {
+        this.setState({ editCustomerModal: false});
+        console.log(' contrato editCustomer',editCustomer);
+       this.props.updateContrato(editCustomer);
+        // test despues borrrar y detectar cuando responde el crear
+        setTimeout(() => {
+          this.props.getContratos();
+      }, 1000);
+        
+    }
+}
+onEditCustomer(customer) {
+    console.log('customer',customer);
+    customer.sizeTotal =  customer.plan.sizeTotal;
+    customer.sizeVideoRow =  customer.plan.sizeVideoRow;
+    customer.sizeVideoFinal =  customer.plan.sizeVideoFinal;
+    this.setState({ editCustomerModal: true, editCustomer: customer, addNewCustomerForm: false });
+}
+
+toggleEditCustomerModal = () => {
+    this.setState({
+        editCustomerModal: !this.state.editCustomerModal
+    });
+}
+
+
+
       render() {
         const { items, loading } = this.props;
         const { newCustomers, sectionReload, alertDialog, editCustomerModal, addNewCustomerForm, editCustomer, snackbar, successMessage, addNewCustomerDetails } = this.state;
@@ -169,7 +204,23 @@ class Contratos extends Component {
                           <TableCell>Pendiente</TableCell>
                           <TableCell>${n.monthlyPaymentDay}</TableCell>
                           <TableCell>Atrasado</TableCell>
-                          <TableCell></TableCell>
+                          <TableCell>
+
+                        <div className="row">
+                          <div className="col-md-6">
+                          <a href="javascript:void(0)"  onClick={() => this.onEditCustomer(n)}>
+                                        <i className="zmdi zmdi-edit"></i>
+                                    </a>
+                          </div>
+                          <div className="col-md-6">
+                          <a href="javascript:void(0)"   onClick={() => this.onDeleteCustomer(n)}>
+                                        <i className="zmdi zmdi-delete"></i>
+                                    </a>
+                          </div>
+                          </div>
+
+
+                          </TableCell>
                         </TableRow>
                       );
                     })}
@@ -263,33 +314,73 @@ class Contratos extends Component {
                                 </Form>
                                 : <Form>
                                     <FormGroup>
-                                        <Label for="customerId">Id</Label>
+                                        <Label for="Dni">sizeTotal</Label>
                                         <Input
                                             type="text"
-                                            name="name"
-                                            id="customerId"
-                                            defaultValue={editCustomer.customer_id}
-                                            readOnly
+                                            name="sizeTotal"
+                                            id="sizeTotal"
+                                            value={editCustomer.sizeTotal}
+                                            onChange={(e) => this.onChangeCustomerDetails('sizeTotal', e.target.value)}
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="customerName">Name</Label>
+                                        <Label for="sizeVideoRow">sizeVideoRow</Label>
                                         <Input
                                             type="text"
-                                            name="name"
-                                            id="customerName"
-                                            value={editCustomer.customer_name}
-                                            onChange={(e) => this.onChangeCustomerDetails('customer_name', e.target.value)}
+                                            name="sizeVideoRow"
+                                            id="sizeVideoRow"
+                                            value={editCustomer.sizeVideoRow}
+                                            onChange={(e) => this.onChangeCustomerDetails('sizeVideoRow', e.target.value)}
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="customerEmail">Email</Label>
+                                        <Label for="sizeVideoFinal">sizeVideoFinal</Label>
                                         <Input
-                                            type="email"
-                                            name="email"
-                                            id="customerEmail"
-                                            value={editCustomer.customer_email}
-                                            onChange={(e) => this.onChangeCustomerDetails('customer_email', e.target.value)}
+                                            type="text"
+                                            name="sizeVideoFinal"
+                                            id="sizeVideoFinal"
+                                            value={editCustomer.sizeVideoFinal}
+                                            onChange={(e) => this.onChangeCustomerDetails('sizeVideoFinal', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="monthlyPaymentDay">monthlyPaymentDay</Label>
+                                        <Input
+                                            type="number"
+                                            name="monthlyPaymentDay"
+                                            id="monthlyPaymentDay"
+                                            value={editCustomer.monthlyPaymentDay}
+                                            onChange={(e) => this.onChangeCustomerDetails('monthlyPaymentDay', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="monthlyCost">monthlyCost</Label>
+                                        <Input
+                                            type="number"
+                                            name="monthlyCost"
+                                            id="monthlyCost"
+                                            value={editCustomer.monthlyCost}
+                                            onChange={(e) => this.onChangeCustomerDetails('monthlyCost', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="startDate">startDate</Label>
+                                        <Input
+                                            type="date"
+                                            name="startDate"
+                                            id="startDate"
+                                            value={moment(new Date(editCustomer.startDate)).format('YYYY-MM-DD')}
+                                            onChange={(e) => this.onChangeCustomerDetails('startDate', e.target.value)}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="endDate">endDate</Label>
+                                        <Input
+                                            type="date"
+                                            name="endDate"
+                                            id="endDate"
+                                            value={moment(new Date(editCustomer.endDate)).format('YYYY-MM-DD')} 
+                                            onChange={(e) => this.onChangeCustomerDetails('endDate', e.target.value)}
                                         />
                                     </FormGroup>
                                 </Form>
@@ -319,5 +410,5 @@ const mapStateToProps = ({ contratos }) => {
   }
   
   export default withRouter(connect(mapStateToProps, {
-    getContratos,addContrato
+    getContratos,addContrato,updateContrato
   })(Contratos));

@@ -11,7 +11,10 @@ import {
     GET_CONTRATOS_SUCCES,
     ADD_CONTRATOS,
     ADD_CONTRATOS_SUCCES,
-    ADD_CONTRATOS_FAILURE
+    ADD_CONTRATOS_FAILURE,
+    UPDATE_CONTRATOS,
+    UPDATE_CONTRATOS_SUCCES,
+    UPDATE_CONTRATOS_FAILURE
 } from '../actions/types';
 
 /**
@@ -47,7 +50,15 @@ export default (state = INIT_STATE, action) => {
                 loading: false
             };
 
+        case UPDATE_CONTRATOS:
+            return { ...state, loading: true };
 
+        // get Contratos
+        case UPDATE_CONTRATOS_SUCCES:
+            return {
+                ...state,
+                loading: false
+            };
 
         default: return { ...state };
     }

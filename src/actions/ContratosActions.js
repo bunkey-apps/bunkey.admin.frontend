@@ -9,7 +9,10 @@ import {
     GET_CONTRATOS_SUCCES,
     ADD_CONTRATOS,
     ADD_CONTRATOS_SUCCES,
-    ADD_CONTRATOS_FAILURE
+    ADD_CONTRATOS_FAILURE,
+    UPDATE_CONTRATOS,
+    UPDATE_CONTRATOS_SUCCES,
+    UPDATE_CONTRATOS_FAILURE
 } from './types';
 
 // app config
@@ -47,7 +50,7 @@ export const getContratos = () => (dispatch) => {
 
 
 /**
- * Redux Action To ADD Clientes
+ * Redux Action To ADD Contrato
  */
 export const addContrato = (contrato) => (dispatch) => {
     console.log('addContrato FORM',contrato);
@@ -81,6 +84,47 @@ export const addContrato = (contrato) => (dispatch) => {
         .then((response) => {
             console.log('Contrato creado',response);
             dispatch({ type: ADD_CONTRATOS_SUCCES});
+        })
+        .catch(error => {
+            // error handling
+        })
+}
+
+
+/**
+ * Redux Action To Edit Contrato
+ */
+export const updateContrato = (contrato) => (dispatch) => {
+    console.log('update FORM',contrato);
+    dispatch({ type: UPDATE_CONTRATOS });
+    const token = localStorage.getItem('user_id');
+
+    const tokenJson = JSON.parse(token);
+   
+    console.log('tokenJson4',tokenJson.accessToken);
+    var instance2 = axios.create({
+        baseURL: 'http://dev-api.bunkey.aureolab.cl/',
+        timeout: 3000,
+        headers: {'Content-Type': 'application/json','Authorization': 'Bearer ' + tokenJson.accessToken}
+      });
+
+      console.log('mo22ment(contrato.startDate).utc().format()',moment(contrato.startDate).utc().format());
+   
+    instance2.put('v1/admin/contracts/' + contrato._id ,{
+        client: contrato.client,
+        monthlyPaymentDay: contrato.monthlyPaymentDay,
+        monthlyCost: contrato.monthlyCost,
+        startDate: moment(contrato.startDate).utc().format(),
+        endDate:  moment(contrato.endDate).utc().format(),
+        plan: {
+            sizeTotal: contrato.sizeTotal,
+            sizeVideoRow: contrato.sizeVideoRow,
+            sizeVideoFinal: contrato.sizeVideoFinal
+        }
+    })
+        .then((response) => {
+            console.log('Contrato creado',response);
+            dispatch({ type: UPDATE_CONTRATOS_SUCCES});
         })
         .catch(error => {
             // error handling

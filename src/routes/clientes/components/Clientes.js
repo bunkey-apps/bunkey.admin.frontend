@@ -75,7 +75,7 @@ class Clientes extends Component {
        //        history.push(`${match.url}/contratos`); SLIDER
        localStorage.setItem("clienteSelect", JSON.stringify(clienteSelect));
        const { match, history } = this.props;
-        history.push(`${match.url}/contratos`);
+        history.push('/app/contratos');
        
       }
 
@@ -199,7 +199,7 @@ toggleEditCustomerModal = () => {
 
 
           
-            <RctCollapsibleCard heading="Lista Usuarios" reloadable ><a href="javascript:void(0)" onClick={() => this.onAddClient()}><i className="ti-plus"></i></a>
+            <RctCollapsibleCard heading="Lista Clientes" reloadable ><a href="javascript:void(0)" onClick={() => this.onAddClient()}><i className="ti-plus"></i></a>
             {loading &&
                 <div className="d-flex justify-content-center loader-overlay">
                   <CircularProgress />
