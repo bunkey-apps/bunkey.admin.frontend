@@ -68,10 +68,10 @@ class UserBlock extends Component {
             <div className="top-sidebar">
                 <div className="site-logo">
                     <Link to="/" className="logo-mini">
-                      <img src={require('../../assets/img/appLogo.png')} className="mr-15" alt="site logo" width="35" height="35" />
+                      <img src={require('../../assets/img/logo_bunkey-w.svg')} className="mr-15" alt="site logo" width="35" height="35" />
                     </Link>
                     <Link to="/" className="logo-normal">
-                        <img src={require('../../assets/img/appLogoText.png')} className="img-fluid" alt="site-logo" width="67" height="17" />
+                        <img src={require('../../assets/img/logo_bunkey-w.svg')} className="img-fluid" alt="site-logo" width="67" height="17" />
                     </Link>
                 </div>
                 <div className="sidebar-user-block media">
@@ -85,57 +85,8 @@ class UserBlock extends Component {
                         </DropdownToggle>
                         <DropdownMenu>
                             <ul className="list-unstyled mb-0">
-                                <li className="media p-15 border-bottom">
-                                    <img src={require('../../assets/img/user-7.jpg')} alt="user profile" className="rounded-circle mr-15" width="42" height="42" />
-                                    <div className="media-body">
-                                        <p className="mb-0 fs-14">Lucile Beck</p>
-                                        <span className="text-muted fs-14">info@example.com</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <Link to={{
-                                        pathname: '/app/users/user-profile-1',
-                                        state: { activeTab: 0 }
-                                    }}>
-                                        <i className="ti ti-user"></i>
-                                        <IntlMessages id="widgets.profile" />
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={{
-                                        pathname: '/app/users/user-profile-1',
-                                        state: { activeTab: 2 }
-                                    }}>
-                                        <i className="ti ti-comment-alt"></i>
-                                        <IntlMessages id="widgets.messages" />
-                                        <span className="badge badge-danger pull-right">3</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/app/pages/feedback">
-                                        <i className="ti ti-pencil"></i>
-                                        Feedback
-                                        <span className="badge badge-info pull-right">1</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" onClick={() => this.openSupportModal()}>
-                                        <i className="ti ti-headphone-alt"></i>
-                                        Support
-                                    </a>
-                                </li>
-                                <li>
-                                    <Link to="/app/pages/faq">
-                                        <i className="ti ti-help-alt"></i>
-                                        Faq(s)
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/app/pages/pricing">
-                                        <i className="ti-package"></i>
-                                        Upgrade Plans
-                                    </Link>
-                                </li>
+                              
+                               
                                 <li className="border-top">
                                     <a href="javascript:void(0)" onClick={() => this.logoutUser()}>
                                         <i className="ti ti-power-off"></i>

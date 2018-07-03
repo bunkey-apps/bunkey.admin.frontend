@@ -2,7 +2,7 @@
  * App Config File
  */
 const AppConfig = {
-    appLogo: require('../assets/img/site-logo.png'),          // App Logo
+    appLogo: require('../assets/img/logo_bunkey-w.svg'),          // App Logo
     appUrl: 'http://reactify.theironnetwork.org',             // App Url
     brandName: 'Reactify',                                    // Brand Name
     navCollapsed: false,                                      // Sidebar collapse
@@ -14,10 +14,10 @@ const AppConfig = {
     enableSidebarBackgroundImage: true,                       // Enable Sidebar Background Image
     sidebarImage: require('../assets/img/sidebar-1.jpg'),     // Select sidebar image
     locale: {
-        languageId: 'english',
-        locale: 'en',
-        name: 'English',
-        icon: 'en',
+        languageId: 'spanish',
+        locale: 'es',
+        name: 'spanish',
+        icon: 'es',
     },
     enableUserTour: true,                                      // Enable / Disable User Tour
     copyRightText: 'Reactify © 2018 All Rights Reserved.',      // Copy Right Text
