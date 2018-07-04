@@ -184,8 +184,16 @@ deleteCustomer() {
 
 
           
-            <RctCollapsibleCard heading="Lista Usuarios" fullBlock>
-            <a href="javascript:void(0)" onClick={() => this.onAddUsuario()}><i className="ti-plus"></i></a>
+            <RctCollapsibleCard>
+
+                <div className={'rct-block-title'}>
+                    <h4>Lista Usuarios</h4>
+                    <div className="contextual-link">
+                        <a href="javascript:void(0)" onClick={() => this.onAddUsuario()}><i className="ti-plus"></i></a>
+                    </div>
+                </div>
+
+
 
             {loading &&
                 <div className="d-flex justify-content-center loader-overlay">
@@ -284,7 +292,7 @@ deleteCustomer() {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="name">password</Label>
+                                        <Label for="name">Clave</Label>
                                         <Input
                                             type="password"
                                             name="password"
@@ -294,7 +302,7 @@ deleteCustomer() {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="name">name</Label>
+                                        <Label for="name">Nombre</Label>
                                         <Input
                                             type="text"
                                             name="name"
@@ -304,7 +312,7 @@ deleteCustomer() {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="telefono">role</Label>
+                                        <Label for="telefono">Rol</Label>
                                         <Input
                                             type="text"
                                             name="role"
@@ -328,7 +336,7 @@ deleteCustomer() {
                                     </FormGroup>
                                    
                                     <FormGroup>
-                                        <Label for="name">name</Label>
+                                        <Label for="name">Nombre</Label>
                                         <Input
                                             type="text"
                                             name="name"
@@ -338,7 +346,7 @@ deleteCustomer() {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="telefono">role</Label>
+                                        <Label for="telefono">Rol</Label>
                                         <Input
                                             type="text"
                                             name="role"

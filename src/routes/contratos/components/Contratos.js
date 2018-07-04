@@ -200,7 +200,15 @@ getPagos = (pagos) => {
 
 
           
-            <RctCollapsibleCard heading="Contratos" reloadable ><a href="javascript:void(0)" onClick={() => this.onAddContrato()}><i className="ti-plus"></i></a>
+            <RctCollapsibleCard >
+            
+            <div className={'rct-block-title'}>
+                    <h4>Contratos</h4>
+                    <div className="contextual-link">
+                        <a href="javascript:void(0)" onClick={() => this.onAddContrato()}><i className="ti-plus"></i></a>
+                    </div>
+                </div>
+            
             {loading &&
                 <div className="d-flex justify-content-center loader-overlay">
                   <CircularProgress />
@@ -281,7 +289,7 @@ getPagos = (pagos) => {
                         toggle={this.toggleEditCustomerModal}
                     >
                         <ModalHeader toggle={this.toggleEditCustomerModal}>
-                            {addNewCustomerForm ? 'Crear Cliente' : 'Edit Customer'}
+                            {addNewCustomerForm ? 'Crear Contrato' : 'Editar Contrato'}
                         </ModalHeader>
                         <ModalBody>
                             {addNewCustomerForm ?
