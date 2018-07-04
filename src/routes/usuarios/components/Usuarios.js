@@ -197,7 +197,7 @@ deleteCustomer() {
               <Table>
                 <TableHead>
                   <TableRow hover>
-                    <TableCell numeric>#</TableCell>
+                    <TableCell >#</TableCell>
                     <TableCell>Nombre</TableCell>
                     <TableCell>e-mail</TableCell>
                     <TableCell>Estado</TableCell>
@@ -210,7 +210,7 @@ deleteCustomer() {
                     {items.map((n, index) => {
                       return (
                         <TableRow hover key={index}>
-                         <TableCell numeric>{index}</TableCell>
+                         <TableCell >{index}</TableCell>
                           <TableCell>{n.name}</TableCell>
                           <TableCell>{n.email}</TableCell>
                           {n.status ?  <TableCell>Activo</TableCell> : <TableCell>Pendiente</TableCell>}

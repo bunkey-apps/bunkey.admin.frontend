@@ -199,7 +199,7 @@ toggleEditCustomerModal = () => {
 
 
           
-            <RctCollapsibleCard heading="Lista Clientes" reloadable >
+            <RctCollapsibleCard heading="Lista Clientes" reloadable fullBlock >
             <a href="javascript:void(0)" onClick={() => this.onAddClient()}><i className="ti-plus"></i></a>
             {loading &&
                 <div className="d-flex justify-content-center loader-overlay">
@@ -211,12 +211,12 @@ toggleEditCustomerModal = () => {
               <Table>
                 <TableHead>
                   <TableRow hover>
-                    <TableCell numeric>#</TableCell>
+                    <TableCell >#</TableCell>
                     <TableCell>Nombre DNI</TableCell>
                     <TableCell>Datos Contacto</TableCell>
                     <TableCell>Estado</TableCell>
-                    <TableCell>Saldo Atrasado</TableCell>
                     <TableCell>Tamaño Ocupado</TableCell>
+                    <TableCell>Saldo Atrasado</TableCell>
                     <TableCell>Usuarios</TableCell>
                     <TableCell>Acciones</TableCell>
                   </TableRow>
@@ -226,7 +226,7 @@ toggleEditCustomerModal = () => {
                     {items.map((n, index) => {
                       return (
                         <TableRow hover key={index} >
-                         <TableCell numeric  onClick={() => this.getContratos(n)}>{index}</TableCell>
+                         <TableCell   onClick={() => this.getContratos(n)}>{index}</TableCell>
                           <TableCell  onClick={() => this.getContratos(n)}>{n.dni}</TableCell>
                           <TableCell  onClick={() => this.getContratos(n)}>{n.name} {n.email}</TableCell>
                           {n.status ?  <TableCell  onClick={() => this.getContratos(n)}>Activo</TableCell> : <TableCell>Pendiente</TableCell>}

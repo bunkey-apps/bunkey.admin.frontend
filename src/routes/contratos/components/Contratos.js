@@ -181,6 +181,14 @@ handleClose = () => {
     console.log('handleClose');
   this.setState({ alertDialog: false });
 }
+
+getPagos = (pagos) => {
+    console.log('pagos',pagos);
+    localStorage.setItem("pagosContrato", JSON.stringify(pagos));
+       const { match, history } = this.props;
+        history.push('/app/pagos');
+    
+   }
       render() {
         const { items, loading } = this.props;
         const { newCustomers, sectionReload, alertDialog, editCustomerModal, addNewCustomerForm, editCustomer, snackbar, successMessage, addNewCustomerDetails } = this.state;
@@ -203,7 +211,7 @@ handleClose = () => {
               <Table>
                 <TableHead>
                   <TableRow hover>
-                    <TableCell numeric>#</TableCell>
+                    <TableCell>#</TableCell>
                     <TableCell>Tamaño Total</TableCell>
                     <TableCell>Estado</TableCell>
                     <TableCell>Monto</TableCell>
@@ -216,11 +224,11 @@ handleClose = () => {
                     {items.map((n, index) => {
                       return (
                         <TableRow hover key={index}>
-                         <TableCell numeric>{index}</TableCell>
-                         <TableCell>{n.plan.sizeTotal}</TableCell>
-                          <TableCell>Pendiente</TableCell>
-                          <TableCell>${n.monthlyPaymentDay}</TableCell>
-                          <TableCell>Atrasado</TableCell>
+                         <TableCell onClick={() => this.getPagos(n)}>{index}</TableCell>
+                         <TableCell onClick={() => this.getPagos(n)}>{n.plan.sizeTotal}</TableCell>
+                          <TableCell onClick={() => this.getPagos(n)}>Pendiente</TableCell>
+                          <TableCell onClick={() => this.getPagos(n)}>${n.monthlyCost}</TableCell>
+                          <TableCell onClick={() => this.getPagos(n)}>Atrasado</TableCell>
                           <TableCell>
 
                         <div className="row">
@@ -279,7 +287,7 @@ handleClose = () => {
                             {addNewCustomerForm ?
                                 <Form>
                                   <FormGroup>
-                                        <Label for="Dni">sizeTotal</Label>
+                                        <Label for="Dni">Tamaño Total (GB)</Label>
                                         <Input
                                             type="text"
                                             name="sizeTotal"
@@ -289,7 +297,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="sizeVideoRow">sizeVideoRow</Label>
+                                        <Label for="sizeVideoRow">Número de videos</Label>
                                         <Input
                                             type="text"
                                             name="sizeVideoRow"
@@ -299,7 +307,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="sizeVideoFinal">sizeVideoFinal</Label>
+                                        <Label for="sizeVideoFinal">Número de videos finales</Label>
                                         <Input
                                             type="text"
                                             name="sizeVideoFinal"
@@ -309,7 +317,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="monthlyPaymentDay">monthlyPaymentDay</Label>
+                                        <Label for="monthlyPaymentDay">Día de pago mensual</Label>
                                         <Input
                                             type="number"
                                             name="monthlyPaymentDay"
@@ -319,7 +327,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="monthlyCost">monthlyCost</Label>
+                                        <Label for="monthlyCost">Costo Mensual</Label>
                                         <Input
                                             type="number"
                                             name="monthlyCost"
@@ -329,7 +337,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="startDate">startDate</Label>
+                                        <Label for="startDate">Fecha de inicio</Label>
                                         <Input
                                             type="date"
                                             name="startDate"
@@ -339,7 +347,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="endDate">endDate</Label>
+                                        <Label for="endDate">Fecha de término</Label>
                                         <Input
                                             type="date"
                                             name="endDate"
@@ -351,7 +359,7 @@ handleClose = () => {
                                 </Form>
                                 : <Form>
                                     <FormGroup>
-                                        <Label for="Dni">sizeTotal</Label>
+                                        <Label for="Dni">Tamaño Total (GB)</Label>
                                         <Input
                                             type="text"
                                             name="sizeTotal"
@@ -361,7 +369,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="sizeVideoRow">sizeVideoRow</Label>
+                                        <Label for="sizeVideoRow">Número de videos</Label>
                                         <Input
                                             type="text"
                                             name="sizeVideoRow"
@@ -371,7 +379,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="sizeVideoFinal">sizeVideoFinal</Label>
+                                        <Label for="sizeVideoFinal">Número de videos finales</Label>
                                         <Input
                                             type="text"
                                             name="sizeVideoFinal"
@@ -381,7 +389,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="monthlyPaymentDay">monthlyPaymentDay</Label>
+                                        <Label for="monthlyPaymentDay">Día de pago mensual</Label>
                                         <Input
                                             type="number"
                                             name="monthlyPaymentDay"
@@ -391,7 +399,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="monthlyCost">monthlyCost</Label>
+                                        <Label for="monthlyCost">Costo Mensual</Label>
                                         <Input
                                             type="number"
                                             name="monthlyCost"
@@ -401,7 +409,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="startDate">startDate</Label>
+                                        <Label for="startDate">Fecha de inicio</Label>
                                         <Input
                                             type="date"
                                             name="startDate"
@@ -411,7 +419,7 @@ handleClose = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="endDate">endDate</Label>
+                                        <Label for="endDate">Fecha de término</Label>
                                         <Input
                                             type="date"
                                             name="endDate"

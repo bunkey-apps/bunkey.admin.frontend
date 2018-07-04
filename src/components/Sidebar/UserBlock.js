@@ -67,11 +67,9 @@ class UserBlock extends Component {
         return (
             <div className="top-sidebar">
                 <div className="site-logo">
-                    <Link to="/" className="logo-mini">
-                      <img src={require('../../assets/img/logo_bunkey-w.svg')} className="mr-15" alt="site logo" width="35" height="35" />
-                    </Link>
-                    <Link to="/" className="logo-normal">
-                        <img src={require('../../assets/img/logo_bunkey-w.svg')} className="img-fluid" alt="site-logo" width="67" height="17" />
+                   
+                    <Link to="/" className="logo-normal user-title-menu">
+                        <img src={require('../../assets/img/logo_bunkey-w.svg')} className="img-fluid" alt="site-logo"/>
                     </Link>
                 </div>
                 <div className="sidebar-user-block media">
@@ -80,7 +78,7 @@ class UserBlock extends Component {
                     </div>
                     <Dropdown isOpen={this.state.userDropdownMenu} toggle={() => this.toggleUserDropdownMenu()} className="rct-dropdown media-body pt-10">
                         <DropdownToggle nav>
-                            Lucile Beck
+                            Admin
                             <i className="ti-angle-down pull-right"></i>
                         </DropdownToggle>
                         <DropdownMenu>
@@ -90,7 +88,7 @@ class UserBlock extends Component {
                                 <li className="border-top">
                                     <a href="javascript:void(0)" onClick={() => this.logoutUser()}>
                                         <i className="ti ti-power-off"></i>
-                                        Logout
+                                        Salir
                                     </a>
                                 </li>
                             </ul>

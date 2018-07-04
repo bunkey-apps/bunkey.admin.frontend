@@ -36,6 +36,10 @@ const AsyncContratosComponent = Loadable({
     loading: () =>   <RctPageLoader />,
 });
 
+const AsyncPagosComponent = Loadable({
+    loader: () => import("../../routes/pagos/index.js"),
+    loading: () =>   <RctPageLoader />,
+});
 // widgets
 const AsyncWidgetsComponent = Loadable({
     loader: () => import("../../routes/widgets"),
@@ -583,6 +587,7 @@ export {
     AsyncTagsComponent,
     AsyncUsuariosComponent,
     AsyncContratosComponent,
-    AsyncClientesComponent
+    AsyncClientesComponent,
+    AsyncPagosComponent
 
 };
