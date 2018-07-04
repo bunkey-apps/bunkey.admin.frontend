@@ -316,7 +316,7 @@ toggleEditCustomerModal = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="agent">Agent</Label>
+                                        <Label for="agent">Agente</Label>
                                         <Input
                                             type="text"
                                             name="agent"
@@ -368,7 +368,7 @@ toggleEditCustomerModal = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="agent">Agent</Label>
+                                        <Label for="agent">Agente</Label>
                                         <Input
                                             type="text"
                                             name="agent"
