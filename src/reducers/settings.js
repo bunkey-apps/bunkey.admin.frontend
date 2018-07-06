@@ -132,9 +132,11 @@ export default (state = INIT_STATE, action) => {
     case COLLAPSED_SIDEBAR:
       if (window.outerWidth > 1199) {
         if (action.isCollapsed) {
-          NotificationManager.success('Sidebar Collapse Activated!');
+          NotificationManager.success('Barra lateral desactivada!');
+
         } else {
-          NotificationManager.success('Sidebar Collapse Deactivated!');
+          NotificationManager.success('Barra lateral activada!');
+
         }
       }
       return { ...state, navCollapsed: action.isCollapsed };
