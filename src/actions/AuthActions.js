@@ -51,7 +51,7 @@ export const logoutUserFromFirebase = () => (dispatch) => {
         .then(() => {
             dispatch({ type: LOGOUT_USER });
             localStorage.removeItem('user_id');
-            NotificationManager.success('Adios!');
+            NotificationManager.success('Adios');
         })
         .catch((error) => {
             NotificationManager.error(error.message);
@@ -160,7 +160,7 @@ export const signinUserWithBunkey = (user, history) => (dispatch) => {
         localStorage.setItem("user_id", JSON.stringify(user.data));
         dispatch({ type: LOGIN_USER_SUCCESS, payload: user.data });
         history.push('/');
-        NotificationManager.success('Ingreso correcto!');
+        NotificationManager.success('Ingreso correcto');
     })
     .catch((error) => {
         dispatch({ type: LOGIN_USER_FAILURE });
