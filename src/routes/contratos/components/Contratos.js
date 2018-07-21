@@ -303,7 +303,7 @@ getPagos = (pagos) => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="sizeVideoRow">Número de videos</Label>
+                                        <Label for="sizeVideoRow">Media (GB)</Label>
                                         <Input
                                             type="text"
                                             name="sizeVideoRow"
@@ -313,7 +313,7 @@ getPagos = (pagos) => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="sizeVideoFinal">Número de videos finales</Label>
+                                        <Label for="sizeVideoFinal">Master (GB)</Label>
                                         <Input
                                             type="text"
                                             name="sizeVideoFinal"
@@ -333,7 +333,7 @@ getPagos = (pagos) => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="monthlyCost">Costo Mensual</Label>
+                                        <Label for="monthlyCost">Cobro Mensual</Label>
                                         <Input
                                             type="number"
                                             name="monthlyCost"
@@ -375,7 +375,7 @@ getPagos = (pagos) => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="sizeVideoRow">Número de videos</Label>
+                                        <Label for="sizeVideoRow">Media (GB)</Label>
                                         <Input
                                             type="text"
                                             name="sizeVideoRow"
@@ -385,7 +385,7 @@ getPagos = (pagos) => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="sizeVideoFinal">Número de videos finales</Label>
+                                        <Label for="sizeVideoFinal">Master (GB)</Label>
                                         <Input
                                             type="text"
                                             name="sizeVideoFinal"
@@ -405,7 +405,7 @@ getPagos = (pagos) => {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="monthlyCost">Costo Mensual</Label>
+                                        <Label for="monthlyCost">Cobro Mensual</Label>
                                         <Input
                                             type="number"
                                             name="monthlyCost"

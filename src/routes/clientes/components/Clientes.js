@@ -216,7 +216,7 @@ toggleEditCustomerModal = () => {
               <Table>
                 <TableHead>
                   <TableRow hover>
-                    <TableCell>Nombre DNI</TableCell>
+                    <TableCell>RUT</TableCell>
                     <TableCell>Datos Contacto</TableCell>
                     <TableCell>Estado</TableCell>
                     <TableCell>Tamaño Ocupado</TableCell>
@@ -231,12 +231,12 @@ toggleEditCustomerModal = () => {
                       return (
                         <TableRow hover key={index} >
                           <TableCell  onClick={() => this.getContratos(n)}>{n.dni}</TableCell>
-                          <TableCell  onClick={() => this.getContratos(n)}>{n.name} {n.email}</TableCell>
+                          <TableCell  onClick={() => this.getContratos(n)}><div>{n.name}</div> <div>{n.email}</div></TableCell>
                           {n.status ?  <TableCell  onClick={() => this.getContratos(n)}>Activo</TableCell> : <TableCell>Pendiente</TableCell>}
 
                          <TableCell  onClick={() => this.getContratos(n)}>500 GB Bitacora</TableCell>
                           <TableCell  onClick={() => this.getContratos(n)}>$800.000</TableCell>
-                          <TableCell  onClick={() => this.getContratos(n)}>5Usuarios</TableCell>
+                          <TableCell  onClick={() => this.getContratos(n)}>5</TableCell>
                           <TableCell>
                           <div className="row">
                           <div className="col-md-6">
@@ -294,7 +294,7 @@ toggleEditCustomerModal = () => {
                             {addNewCustomerForm ?
                                 <Form>
                                   <FormGroup>
-                                        <Label for="Dni">DNI</Label>
+                                        <Label for="Dni">RUT</Label>
                                         <Input
                                             type="text"
                                             name="dni"
@@ -346,7 +346,7 @@ toggleEditCustomerModal = () => {
                                 </Form>
                                 : <Form>
                                     <FormGroup>
-                                        <Label for="Dni">DNI</Label>
+                                        <Label for="Dni">RUT</Label>
                                         <Input
                                             type="text"
                                             name="dni"
