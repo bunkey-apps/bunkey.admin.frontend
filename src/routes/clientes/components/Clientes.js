@@ -69,8 +69,18 @@ class Clientes extends Component {
                 id: ''
             }
       }
-    }
+      this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
+      this.handleSubmitEdit = this.handleSubmitEdit.bind(this);
 
+    }
+    handleSubmitEdit(event) {
+        event.preventDefault();
+        this.onSubmitCustomerEditDetailForm();
+      }
+    handleSubmitAdd(event) {
+        event.preventDefault();
+        this.onSubmitAddNewCustomerForm();
+      }
       getContratos = (clienteSelect) => {
        //        history.push(`${match.url}/contratos`); SLIDER
        localStorage.setItem("clienteSelect", JSON.stringify(clienteSelect));
@@ -292,10 +302,11 @@ toggleEditCustomerModal = () => {
                         </ModalHeader>
                         <ModalBody>
                             {addNewCustomerForm ?
-                                <Form>
+                                <Form  id="formAdd" onSubmit={this.handleSubmitAdd}>
                                   <FormGroup>
                                         <Label for="Dni">RUT</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="dni"
                                             id="dni"
@@ -306,6 +317,7 @@ toggleEditCustomerModal = () => {
                                     <FormGroup>
                                         <Label for="name">Nombre</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="name"
                                             id="name"
@@ -316,6 +328,7 @@ toggleEditCustomerModal = () => {
                                     <FormGroup>
                                         <Label for="agent">Contacto</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="agent"
                                             id="agent"
@@ -326,6 +339,7 @@ toggleEditCustomerModal = () => {
                                     <FormGroup>
                                         <Label for="telefono">Telefono</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="telefono"
                                             id="telefno"
@@ -336,6 +350,7 @@ toggleEditCustomerModal = () => {
                                     <FormGroup>
                                         <Label for="email">Email</Label>
                                         <Input
+                                            required="true"
                                             type="email"
                                             name="email"
                                             id="email"
@@ -344,10 +359,11 @@ toggleEditCustomerModal = () => {
                                         />
                                     </FormGroup>
                                 </Form>
-                                : <Form>
+                                : <Form id="formEdit" onSubmit={this.handleSubmitEdit} >
                                     <FormGroup>
                                         <Label for="Dni">RUT</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="dni"
                                             id="dni"
@@ -358,6 +374,7 @@ toggleEditCustomerModal = () => {
                                     <FormGroup>
                                         <Label for="name">Nombre</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="name"
                                             id="name"
@@ -368,6 +385,7 @@ toggleEditCustomerModal = () => {
                                     <FormGroup>
                                         <Label for="agent">Contacto</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="agent"
                                             id="agent"
@@ -378,6 +396,7 @@ toggleEditCustomerModal = () => {
                                     <FormGroup>
                                         <Label for="telefono">Telefono</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="telefono"
                                             id="telefno"
@@ -388,6 +407,7 @@ toggleEditCustomerModal = () => {
                                     <FormGroup>
                                         <Label for="email">Email</Label>
                                         <Input
+                                            required="true"
                                             type="email"
                                             name="email"
                                             id="email"
@@ -401,11 +421,11 @@ toggleEditCustomerModal = () => {
                         <ModalFooter>
                             {addNewCustomerForm ?
                                 <div>
-                                    <Button variant="raised" className="btn-danger text-white alert-botton-cancel-margin" onClick={this.toggleEditCustomerModal}><IntlMessages id="button.cancel" /></Button>
-                                    <Button variant="raised" className="btn-primary text-white" onClick={() => this.onSubmitAddNewCustomerForm()}><IntlMessages id="button.add" /></Button>{' '}
+                                    <Button  variant="raised" className="btn-danger text-white alert-botton-cancel-margin" onClick={this.toggleEditCustomerModal}><IntlMessages id="button.cancel" /></Button>
+                                    <Button form="formAdd" type="submit" variant="raised" className="btn-primary text-white"><IntlMessages id="button.add" /></Button>{' '}
                                 </div>
                                 : <div><Button variant="raised" className="btn-danger text-white alert-botton-cancel-margin" onClick={this.toggleEditCustomerModal}><IntlMessages id="button.cancel" /></Button>
-                                <Button variant="raised" className="btn-primary text-white" onClick={() => this.onSubmitCustomerEditDetailForm()}><IntlMessages id="button.update" /></Button>{' '}</div>
+                                <Button form="formEdit" type="submit" variant="raised" className="btn-primary text-white"><IntlMessages id="button.update" /></Button>{' '}</div>
                             }
                         </ModalFooter>
                     </Modal>
