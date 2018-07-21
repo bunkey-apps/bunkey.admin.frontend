@@ -280,7 +280,7 @@ deleteCustomer() {
                             {addNewCustomerForm ?
                                 <Form>
                                   <FormGroup>
-                                        <Label for="email">email</Label>
+                                        <Label for="email">Email</Label>
                                         <Input
                                             type="email"
                                             name="email"
@@ -290,7 +290,7 @@ deleteCustomer() {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="name">Clave</Label>
+                                        <Label for="name">Crear Clave</Label>
                                         <Input
                                             type="password"
                                             name="password"
@@ -323,7 +323,7 @@ deleteCustomer() {
                                 </Form>
                                 : <Form>
                                     <FormGroup>
-                                        <Label for="email">email</Label>
+                                        <Label for="email">Email</Label>
                                         <Input
                                             type="email"
                                             name="email"
