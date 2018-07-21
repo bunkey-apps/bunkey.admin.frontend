@@ -75,11 +75,11 @@ class Signin extends Component {
                     </div>
                     <Form onSubmit={this.handleSubmit}>
                       <FormGroup className="has-wrapper">
-                        <Input type="mail" value={email} name="user-mail" id="user-mail" className="has-input input-lg" placeholder="Email" onChange={(event) => this.setState({ email: event.target.value })} />
+                        <Input required="true" type="mail" value={email} name="user-mail" id="user-mail" className="has-input input-lg" placeholder="Email" onChange={(event) => this.setState({ email: event.target.value })} />
                         <span className="has-icon"><i className="ti-email"></i></span>
                       </FormGroup>
                       <FormGroup className="has-wrapper">
-                        <Input value={password} type="Password" name="user-pwd" id="pwd" className="has-input input-lg" placeholder="Password" onChange={(event) => this.setState({ password: event.target.value })} />
+                        <Input required="true" value={password} type="Password" name="user-pwd" id="pwd" className="has-input input-lg" placeholder="Password" onChange={(event) => this.setState({ password: event.target.value })} />
                         <span className="has-icon"><i className="ti-lock"></i></span>
                       </FormGroup>
                       <FormGroup className="mb-15 session-form-padding-button">
