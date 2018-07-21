@@ -48,7 +48,11 @@ class TagsPage extends Component {
 
 
 
-       <RctCollapsibleCard heading="Lista de Tags" fullBlock>
+       <RctCollapsibleCard>
+       <div className={'rct-block-title'}>
+                    <h4><b>Lista de Tags</b></h4>
+                    
+                </div>
           <div className="table-responsive">
             <Table>
               <TableHead>

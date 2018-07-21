@@ -203,7 +203,7 @@ getPagos = (pagos) => {
             <RctCollapsibleCard >
             
             <div className={'rct-block-title'}>
-                    <h4>Contratos</h4>
+                    <h4><b>Contratos</b></h4>
                     <div className="contextual-link">
                         <a href="javascript:void(0)" onClick={() => this.onAddContrato()}><i className="ti-plus"></i></a>
                     </div>

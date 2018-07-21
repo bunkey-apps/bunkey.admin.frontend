@@ -64,10 +64,11 @@ export default class DashboardOne extends Component {
                 </div>
         </div>
 
-        <RctCollapsibleCard
-          heading={<IntlMessages id="dashboard" />}
-        >
-         
+        <RctCollapsibleCard>
+        <div className={'rct-block-title'}>
+                    <h4><b>Dashboard</b></h4>
+                    
+                </div>
         </RctCollapsibleCard>
         <div className="row">
               <div className="col-sm-12 col-md-4 mb-30">

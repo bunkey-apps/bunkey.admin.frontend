@@ -201,7 +201,7 @@ toggleEditCustomerModal = () => {
           
             <RctCollapsibleCard>
                 <div className={'rct-block-title'}>
-                    <h4>Lista Clientes</h4>
+                    <h4><b>Lista Clientes</b></h4>
                     <div className="contextual-link">
                         <a href="javascript:void(0)" onClick={() => this.onAddClient()}><i className="ti-plus"></i></a>
                     </div>

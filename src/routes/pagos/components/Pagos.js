@@ -54,7 +54,11 @@ class Pagos extends Component {
 
 
 
-       <RctCollapsibleCard heading="Cartola" fullBlock>
+       <RctCollapsibleCard>
+       <div className={'rct-block-title'}>
+                    <h4><b>Cartola</b></h4>
+                    
+                </div>
           <div className="table-responsive">
             <Table>
               <TableHead>

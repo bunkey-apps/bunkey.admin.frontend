@@ -187,7 +187,7 @@ deleteCustomer() {
             <RctCollapsibleCard>
 
                 <div className={'rct-block-title'}>
-                    <h4>Lista Usuarios</h4>
+                    <h4><b>Lista Usuarios</b></h4>
                     <div className="contextual-link">
                         <a href="javascript:void(0)" onClick={() => this.onAddUsuario()}><i className="ti-plus"></i></a>
                     </div>

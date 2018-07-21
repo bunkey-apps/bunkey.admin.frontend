@@ -54,8 +54,11 @@ class ContratosPage extends Component {
 
        
 
-        <RctCollapsibleCard heading="Consolidado" fullBlock>
-       
+        <RctCollapsibleCard>
+        <div className={'rct-block-title'}>
+                    <h4><b>Consolidado</b></h4>
+                    
+                </div>
           <div className="table-responsive">
             <Table>
               <TableHead>
