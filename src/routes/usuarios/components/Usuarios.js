@@ -83,7 +83,7 @@ class Usuarios extends Component {
                 email: '',
                 password: '',
                 name: '',
-                role: '',
+                role: 'admin',
                 workspace: '',
                 clietntOwner: ''
             }
@@ -311,13 +311,14 @@ deleteCustomer() {
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="telefono">Rol</Label>
-                                        <Input
-                                            type="text"
-                                            name="role"
-                                            id="role"
+                                        <Input type="select" 
+                                            name="role" 
+                                            id="role" 
                                             value={addNewCustomerDetails.role}
                                             onChange={(e) => this.onChangeCustomerAddNewForm('role', e.target.value)}
-                                        />
+                                            >
+                                                <option value="admin">Admin</option>
+                                        </Input>
                                     </FormGroup>
                                    
                                 </Form>
@@ -345,13 +346,15 @@ deleteCustomer() {
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="telefono">Rol</Label>
-                                        <Input
-                                            type="text"
-                                            name="role"
-                                            id="role"
+                                        <Input type="select" 
+                                            name="role" 
+                                            id="role" 
                                             value={editCustomer.role}
                                             onChange={(e) => this.onChangeCustomerDetails('role', e.target.value)}
-                                        />
+                                            >
+                                                <option>Admin</option>
+                                        </Input>
+                                        
                                     </FormGroup>
                                 </Form>
                             }

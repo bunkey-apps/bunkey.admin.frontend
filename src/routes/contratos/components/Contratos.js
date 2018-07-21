@@ -85,7 +85,7 @@ class Contratos extends Component {
             editCustomer: null,
             addNewCustomerDetails: {
               client: '',
-              monthlyPaymentDay: '',
+              monthlyPaymentDay: 5,
               monthlyCost: '',
               startDate: '',
               endDate: '',
@@ -324,13 +324,18 @@ getPagos = (pagos) => {
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="monthlyPaymentDay">Día de pago mensual</Label>
-                                        <Input
-                                            type="number"
-                                            name="monthlyPaymentDay"
-                                            id="monthlyPaymentDay"
+                                        <Input type="select" 
+                                            name="monthlyPaymentDay" 
+                                            id="monthlyPaymentDay" 
                                             value={addNewCustomerDetails.monthlyPaymentDay}
                                             onChange={(e) => this.onChangeCustomerAddNewForm('monthlyPaymentDay', e.target.value)}
-                                        />
+                                            >
+                                                <option>5</option>
+                                                <option>15</option>
+                                                <option>25</option>
+                                        </Input>
+                                 
+                                        
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="monthlyCost">Cobro Mensual</Label>
@@ -396,13 +401,18 @@ getPagos = (pagos) => {
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="monthlyPaymentDay">Día de pago mensual</Label>
-                                        <Input
-                                            type="number"
-                                            name="monthlyPaymentDay"
-                                            id="monthlyPaymentDay"
+                                        <Input type="select" 
+                                            name="monthlyPaymentDay" 
+                                            id="monthlyPaymentDay" 
                                             value={editCustomer.monthlyPaymentDay}
                                             onChange={(e) => this.onChangeCustomerDetails('monthlyPaymentDay', e.target.value)}
-                                        />
+                                            >
+                                                <option>5</option>
+                                                <option>15</option>
+                                                <option>25</option>
+                                        </Input>
+                                       
+                                       
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="monthlyCost">Cobro Mensual</Label>
