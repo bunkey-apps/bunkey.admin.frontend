@@ -216,7 +216,6 @@ toggleEditCustomerModal = () => {
               <Table>
                 <TableHead>
                   <TableRow hover>
-                    <TableCell >#</TableCell>
                     <TableCell>Nombre DNI</TableCell>
                     <TableCell>Datos Contacto</TableCell>
                     <TableCell>Estado</TableCell>
@@ -231,7 +230,6 @@ toggleEditCustomerModal = () => {
                     {items.map((n, index) => {
                       return (
                         <TableRow hover key={index} >
-                         <TableCell   onClick={() => this.getContratos(n)}>{index}</TableCell>
                           <TableCell  onClick={() => this.getContratos(n)}>{n.dni}</TableCell>
                           <TableCell  onClick={() => this.getContratos(n)}>{n.name} {n.email}</TableCell>
                           {n.status ?  <TableCell  onClick={() => this.getContratos(n)}>Activo</TableCell> : <TableCell>Pendiente</TableCell>}

@@ -63,7 +63,6 @@ class Pagos extends Component {
             <Table>
               <TableHead>
                 <TableRow hover>
-                  <TableCell>#</TableCell>
                   <TableCell>Monto</TableCell>
                   <TableCell>Mes</TableCell>
                   <TableCell>Estado</TableCell>
@@ -74,7 +73,6 @@ class Pagos extends Component {
                 {this.state.pagos.map((n, index) => {
                     return (
                       <TableRow hover key={index}>
-                        <TableCell>{index}</TableCell>
                         <TableCell>${this.state.monto}</TableCell>
                         <TableCell>{n.month}</TableCell>
                         

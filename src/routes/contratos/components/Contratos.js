@@ -219,7 +219,6 @@ getPagos = (pagos) => {
               <Table>
                 <TableHead>
                   <TableRow hover>
-                    <TableCell>#</TableCell>
                     <TableCell>Tamaño Total</TableCell>
                     <TableCell>Estado</TableCell>
                     <TableCell>Monto</TableCell>
@@ -232,7 +231,6 @@ getPagos = (pagos) => {
                     {items.map((n, index) => {
                       return (
                         <TableRow hover key={index}>
-                         <TableCell onClick={() => this.getPagos(n)}>{index}</TableCell>
                          <TableCell onClick={() => this.getPagos(n)}>{n.plan.sizeTotal}</TableCell>
                           <TableCell onClick={() => this.getPagos(n)}>Pendiente</TableCell>
                           <TableCell onClick={() => this.getPagos(n)}>${n.monthlyCost}</TableCell>

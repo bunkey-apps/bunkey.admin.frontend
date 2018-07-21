@@ -57,7 +57,6 @@ class TagsPage extends Component {
             <Table>
               <TableHead>
                 <TableRow hover>
-                  <TableCell >#</TableCell>
                   <TableCell>Nombre</TableCell>
                   <TableCell>Acciones</TableCell>
                 </TableRow>
@@ -67,7 +66,6 @@ class TagsPage extends Component {
                   {data.map(n => {
                     return (
                       <TableRow hover key={n.id}>
-                        <TableCell >{n.num}</TableCell>
                         <TableCell>{n.nombre}</TableCell>
                         
                         <TableCell></TableCell>
