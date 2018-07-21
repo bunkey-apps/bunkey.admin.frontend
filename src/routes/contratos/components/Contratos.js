@@ -70,9 +70,18 @@ class Contratos extends Component {
                 sizeVideoFinal: ''
             }
       }
+      this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
+      this.handleSubmitEdit = this.handleSubmitEdit.bind(this);
     }
 
-     
+    handleSubmitEdit(event) {
+        event.preventDefault();
+        this.onSubmitCustomerEditDetailForm();
+      }
+    handleSubmitAdd(event) {
+        event.preventDefault();
+        this.onSubmitAddNewContratoForm();
+      }
 
       componentWillMount() {
         this.props.getContratos();
@@ -291,10 +300,11 @@ getPagos = (pagos) => {
                         </ModalHeader>
                         <ModalBody>
                             {addNewCustomerForm ?
-                                <Form>
+                                <Form id="formAdd" onSubmit={this.handleSubmitAdd}>
                                   <FormGroup>
                                         <Label for="Dni">Tamaño Total (GB)</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="sizeTotal"
                                             id="sizeTotal"
@@ -305,6 +315,7 @@ getPagos = (pagos) => {
                                     <FormGroup>
                                         <Label for="sizeVideoRow">Media (GB)</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="sizeVideoRow"
                                             id="sizeVideoRow"
@@ -315,6 +326,7 @@ getPagos = (pagos) => {
                                     <FormGroup>
                                         <Label for="sizeVideoFinal">Master (GB)</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="sizeVideoFinal"
                                             id="sizeVideoFinal"
@@ -340,6 +352,7 @@ getPagos = (pagos) => {
                                     <FormGroup>
                                         <Label for="monthlyCost">Cobro Mensual</Label>
                                         <Input
+                                            required="true"
                                             type="number"
                                             name="monthlyCost"
                                             id="monthlyCost"
@@ -350,6 +363,7 @@ getPagos = (pagos) => {
                                     <FormGroup>
                                         <Label for="startDate">Fecha de inicio</Label>
                                         <Input
+                                            required="true"
                                             type="date"
                                             name="startDate"
                                             id="startDate"
@@ -360,6 +374,7 @@ getPagos = (pagos) => {
                                     <FormGroup>
                                         <Label for="endDate">Fecha de término</Label>
                                         <Input
+                                            required="true"
                                             type="date"
                                             name="endDate"
                                             id="endDate"
@@ -368,10 +383,11 @@ getPagos = (pagos) => {
                                         />
                                     </FormGroup>
                                 </Form>
-                                : <Form>
+                                : <Form id="formEdit" onSubmit={this.handleSubmitEdit} >
                                     <FormGroup>
                                         <Label for="Dni">Tamaño Total (GB)</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="sizeTotal"
                                             id="sizeTotal"
@@ -382,6 +398,7 @@ getPagos = (pagos) => {
                                     <FormGroup>
                                         <Label for="sizeVideoRow">Media (GB)</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="sizeVideoRow"
                                             id="sizeVideoRow"
@@ -392,6 +409,7 @@ getPagos = (pagos) => {
                                     <FormGroup>
                                         <Label for="sizeVideoFinal">Master (GB)</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="sizeVideoFinal"
                                             id="sizeVideoFinal"
@@ -417,6 +435,7 @@ getPagos = (pagos) => {
                                     <FormGroup>
                                         <Label for="monthlyCost">Cobro Mensual</Label>
                                         <Input
+                                            required="true"
                                             type="number"
                                             name="monthlyCost"
                                             id="monthlyCost"
@@ -427,6 +446,7 @@ getPagos = (pagos) => {
                                     <FormGroup>
                                         <Label for="startDate">Fecha de inicio</Label>
                                         <Input
+                                            required="true"
                                             type="date"
                                             name="startDate"
                                             id="startDate"
@@ -437,6 +457,7 @@ getPagos = (pagos) => {
                                     <FormGroup>
                                         <Label for="endDate">Fecha de término</Label>
                                         <Input
+                                            required="true"
                                             type="date"
                                             name="endDate"
                                             id="endDate"
@@ -451,10 +472,10 @@ getPagos = (pagos) => {
                             {addNewCustomerForm ?
                                 <div>
                                     <Button variant="raised" className="btn-danger text-white alert-botton-cancel-margin" onClick={this.toggleEditCustomerModal}><IntlMessages id="button.cancel" /></Button>
-                                    <Button variant="raised" className="btn-primary text-white" onClick={() => this.onSubmitAddNewContratoForm()}><IntlMessages id="button.add" /></Button>{' '}
+                                    <Button type="submit" form="formAdd" variant="raised" className="btn-primary text-white"><IntlMessages id="button.add" /></Button>{' '}
                                 </div>
                                 : <div><Button variant="raised" className="btn-danger text-white alert-botton-cancel-margin" onClick={this.toggleEditCustomerModal}><IntlMessages id="button.cancel" /></Button>
-                                <Button variant="raised" className="btn-primary text-white" onClick={() => this.onSubmitCustomerEditDetailForm()}><IntlMessages id="button.update" /></Button>{' '}</div>
+                                <Button type="submit" form="formEdit" variant="raised" className="btn-primary text-white"><IntlMessages id="button.update" /></Button>{' '}</div>
                             }
                         </ModalFooter>
                     </Modal>
