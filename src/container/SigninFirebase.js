@@ -31,14 +31,15 @@ import {
 class Signin extends Component {
 
   state = {
-    email: 'demo@example.com',
-    password: 'test#123'
+    email: '',
+    password: ''
   }
-
+  handleSubmit = this.handleSubmit.bind(this);
   /**
    * On User Login
    */
-  onUserLogin() {
+  handleSubmit(event) {
+    event.preventDefault();
     if (this.state.email !== '' && this.state.password !== '') {
       this.props.signinUserWithBunkey(this.state, this.props.history);
     }
@@ -72,9 +73,9 @@ class Signin extends Component {
                       <h2>Bienvenidos</h2>
                       <small className="mb-0">Ingresa a tu cuenta de Administrador</small>
                     </div>
-                    <Form>
+                    <Form onSubmit={this.handleSubmit}>
                       <FormGroup className="has-wrapper">
-                        <Input type="mail" value={email} name="user-mail" id="user-mail" className="has-input input-lg" placeholder="Enter Email Address" onChange={(event) => this.setState({ email: event.target.value })} />
+                        <Input type="mail" value={email} name="user-mail" id="user-mail" className="has-input input-lg" placeholder="Email" onChange={(event) => this.setState({ email: event.target.value })} />
                         <span className="has-icon"><i className="ti-email"></i></span>
                       </FormGroup>
                       <FormGroup className="has-wrapper">
@@ -85,7 +86,7 @@ class Signin extends Component {
                         <Button
                           className="btn-success text-white btn-lg circle-btn-sm btn-block session-button-color"
                           variant="raised"
-                          onClick={() => this.onUserLogin()}>
+                          type="submit">
                           Ingresar
                             </Button>
                       </FormGroup>
