@@ -164,6 +164,6 @@ export const signinUserWithBunkey = (user, history) => (dispatch) => {
     })
     .catch((error) => {
         dispatch({ type: LOGIN_USER_FAILURE });
-        NotificationManager.error(error.message);
+        NotificationManager.error('Usuario o clave incorrecta, vuelve a intentar');
     });
 }
