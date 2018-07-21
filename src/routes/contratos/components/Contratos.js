@@ -233,7 +233,7 @@ getPagos = (pagos) => {
                         <TableRow hover key={index}>
                          <TableCell onClick={() => this.getPagos(n)}>{n.plan.sizeTotal}</TableCell>
                           <TableCell onClick={() => this.getPagos(n)}>Pendiente</TableCell>
-                          <TableCell onClick={() => this.getPagos(n)}>${n.monthlyCost}</TableCell>
+                          <TableCell onClick={() => this.getPagos(n)}>${n.monthlyCost.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</TableCell>
                           <TableCell onClick={() => this.getPagos(n)}>Atrasado</TableCell>
                           <TableCell>
 

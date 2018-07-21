@@ -73,7 +73,7 @@ class Pagos extends Component {
                 {this.state.pagos.map((n, index) => {
                     return (
                       <TableRow hover key={index}>
-                        <TableCell>${this.state.monto}</TableCell>
+                        <TableCell>${this.state.monto.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</TableCell>
                         <TableCell>{n.month}</TableCell>
                         
                         {n.paymed ?  <TableCell>Pagado</TableCell> : <TableCell>Pendiente</TableCell>}
