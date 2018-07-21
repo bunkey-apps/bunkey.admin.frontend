@@ -67,9 +67,17 @@ class Usuarios extends Component {
                 clietntOwner: ''
             }
       }
-      
+      this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
+      this.handleSubmitEdit = this.handleSubmitEdit.bind(this);
       }
-
+      handleSubmitEdit(event) {
+        event.preventDefault();
+        this.onSubmitCustomerEditDetailForm();
+      }
+    handleSubmitAdd(event) {
+        event.preventDefault();
+        this.onSubmitAddNewCustomerForm();
+      }
       componentWillMount() {
         this.props.getUsuarios();
       }
@@ -278,10 +286,11 @@ deleteCustomer() {
                         </ModalHeader>
                         <ModalBody>
                             {addNewCustomerForm ?
-                                <Form>
+                                <Form  id="formAdd" onSubmit={this.handleSubmitAdd}>
                                   <FormGroup>
                                         <Label for="email">Email</Label>
                                         <Input
+                                            required="true"
                                             type="email"
                                             name="email"
                                             id="email"
@@ -292,6 +301,7 @@ deleteCustomer() {
                                     <FormGroup>
                                         <Label for="name">Crear Clave</Label>
                                         <Input
+                                            required="true"
                                             type="password"
                                             name="password"
                                             id="password"
@@ -302,6 +312,7 @@ deleteCustomer() {
                                     <FormGroup>
                                         <Label for="name">Nombre</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="name"
                                             id="name"
@@ -322,10 +333,11 @@ deleteCustomer() {
                                     </FormGroup>
                                    
                                 </Form>
-                                : <Form>
+                                : <Form id="formEdit" onSubmit={this.handleSubmitEdit} >
                                     <FormGroup>
                                         <Label for="email">Email</Label>
                                         <Input
+                                            required="true"
                                             type="email"
                                             name="email"
                                             id="email"
@@ -337,6 +349,7 @@ deleteCustomer() {
                                     <FormGroup>
                                         <Label for="name">Nombre</Label>
                                         <Input
+                                            required="true"
                                             type="text"
                                             name="name"
                                             id="name"
@@ -363,10 +376,10 @@ deleteCustomer() {
                             {addNewCustomerForm ?
                                 <div>
                                     <Button variant="raised" className="btn-danger text-white alert-botton-cancel-margin" onClick={this.toggleEditCustomerModal}><IntlMessages id="button.cancel" /></Button>
-                                    <Button variant="raised" className="btn-primary text-white" onClick={() => this.onSubmitAddNewCustomerForm()}><IntlMessages id="button.add" /></Button>{' '}
+                                    <Button form="formAdd" type="submit" variant="raised" className="btn-primary text-white"><IntlMessages id="button.add" /></Button>{' '}
                                 </div>
                                 : <div><Button variant="raised" className="btn-danger text-white alert-botton-cancel-margin" onClick={this.toggleEditCustomerModal}><IntlMessages id="button.cancel" /></Button>
-                                <Button variant="raised" className="btn-primary text-white" onClick={() => this.onSubmitCustomerEditDetailForm()}><IntlMessages id="button.update" /></Button>{' '}</div>
+                                <Button form="formEdit" type="submit" variant="raised" className="btn-primary text-white"><IntlMessages id="button.update" /></Button>{' '}</div>
                             }
                         </ModalFooter>
                     </Modal>
