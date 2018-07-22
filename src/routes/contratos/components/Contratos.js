@@ -107,6 +107,20 @@ class Contratos extends Component {
 
      // on change customer details
      onChangeCustomerDetails(key, value) {
+        if(key === 'sizeVideoRow'){
+            var numAux = 0;
+            if(this.state.editCustomer.sizeVideoFinal){
+                numAux = Number.parseInt(this.state.editCustomer.sizeVideoFinal)
+            }
+            this.state.editCustomer.sizeTotal =  Number.parseInt(value) + numAux;
+        }
+        if(key === 'sizeVideoFinal'){
+            var numAux = 0;
+            if(this.state.editCustomer.sizeVideoRow){
+                numAux = Number.parseInt(this.state.editCustomer.sizeVideoRow)
+            }
+            this.state.editCustomer.sizeTotal =  Number.parseInt(value) + numAux;
+        }
       this.setState({
           editCustomer: {
               ...this.state.editCustomer,
@@ -116,6 +130,21 @@ class Contratos extends Component {
   }
     // on change customer add new form value
     onChangeCustomerAddNewForm(key, value) {
+        if(key === 'sizeVideoRow'){
+            var numAux = 0;
+            if(this.state.addNewCustomerDetails.sizeVideoFinal){
+                numAux = Number.parseInt(this.state.addNewCustomerDetails.sizeVideoFinal)
+            }
+            this.state.addNewCustomerDetails.sizeTotal =  Number.parseInt(value) + numAux;
+        }
+        if(key === 'sizeVideoFinal'){
+            var numAux = 0;
+            if(this.state.addNewCustomerDetails.sizeVideoRow){
+                numAux = Number.parseInt(this.state.addNewCustomerDetails.sizeVideoRow)
+            }
+            this.state.addNewCustomerDetails.sizeTotal =  Number.parseInt(value) + numAux;
+        }
+    
       this.setState({
           addNewCustomerDetails: {
               ...this.state.addNewCustomerDetails,
@@ -304,8 +333,8 @@ getPagos = (pagos) => {
                                   <FormGroup>
                                         <Label for="Dni">Tamaño Total (GB)</Label>
                                         <Input
-                                            required="true"
-                                            type="text"
+                                           disabled
+                                            type="number"
                                             name="sizeTotal"
                                             id="sizeTotal"
                                             value={addNewCustomerDetails.sizeTotal}
@@ -316,7 +345,7 @@ getPagos = (pagos) => {
                                         <Label for="sizeVideoRow">Media (GB)</Label>
                                         <Input
                                             required="true"
-                                            type="text"
+                                            type="number"
                                             name="sizeVideoRow"
                                             id="sizeVideoRow"
                                             value={addNewCustomerDetails.sizeVideoRow}
@@ -327,7 +356,7 @@ getPagos = (pagos) => {
                                         <Label for="sizeVideoFinal">Master (GB)</Label>
                                         <Input
                                             required="true"
-                                            type="text"
+                                            type="number"
                                             name="sizeVideoFinal"
                                             id="sizeVideoFinal"
                                             value={addNewCustomerDetails.sizeVideoFinal}
@@ -387,8 +416,8 @@ getPagos = (pagos) => {
                                     <FormGroup>
                                         <Label for="Dni">Tamaño Total (GB)</Label>
                                         <Input
-                                            required="true"
-                                            type="text"
+                                            disabled
+                                            type="number"
                                             name="sizeTotal"
                                             id="sizeTotal"
                                             value={editCustomer.sizeTotal}
@@ -399,7 +428,7 @@ getPagos = (pagos) => {
                                         <Label for="sizeVideoRow">Media (GB)</Label>
                                         <Input
                                             required="true"
-                                            type="text"
+                                            type="number"
                                             name="sizeVideoRow"
                                             id="sizeVideoRow"
                                             value={editCustomer.sizeVideoRow}
@@ -410,7 +439,7 @@ getPagos = (pagos) => {
                                         <Label for="sizeVideoFinal">Master (GB)</Label>
                                         <Input
                                             required="true"
-                                            type="text"
+                                            type="number"
                                             name="sizeVideoFinal"
                                             id="sizeVideoFinal"
                                             value={editCustomer.sizeVideoFinal}
