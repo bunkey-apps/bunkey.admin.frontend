@@ -17,7 +17,7 @@ import RctCollapsibleCard from '../../../components/RctCollapsibleCard/RctCollap
 
 
 
-// For Basic Table
+// For Basic Table 
 let id = 0;
 
 function createData(num, nombre, cantidad) {
