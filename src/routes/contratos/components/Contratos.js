@@ -144,6 +144,13 @@ class Contratos extends Component {
             }
             this.state.addNewCustomerDetails.sizeTotal =  Number.parseInt(value) + numAux;
         }
+
+        if(key === 'startDate'){
+            var fechaAux  =   moment(value)
+          
+            fechaAux.add(1, 'year');
+            this.state.addNewCustomerDetails.endDate = fechaAux ;
+        }
     
       this.setState({
           addNewCustomerDetails: {
@@ -414,7 +421,7 @@ getPagos = (pagos) => {
                                             type="date"
                                             name="endDate"
                                             id="endDate"
-                                            value={addNewCustomerDetails.endDate}
+                                            value={moment(new Date(addNewCustomerDetails.endDate)).format('YYYY-MM-DD')} 
                                             onChange={(e) => this.onChangeCustomerAddNewForm('endDate', e.target.value)}
                                         />
                                     </FormGroup>
