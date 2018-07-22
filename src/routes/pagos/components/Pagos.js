@@ -24,15 +24,61 @@ function createData(num, nombre, cantidad) {
   id += 1;
   return { id, num, nombre, cantidad };
 }
+function parseMes (month){
+  var mes = '';
+  switch (month) {
+
+    case 'January':
+      mes = "enero";
+      break;
+    case 'February':
+      mes = "febrero";
+      break;
+    case 'March':
+      mes = "marzo";
+      break;
+    case 'April':
+      mes = "abril";
+      break;
+    case 'May':
+      mes = "mayo";
+      break;
+    case 'June':
+      mes = "junio";
+      break;
+    case 'July':
+      mes = "julio";
+      break;
+    case 'August':
+      mes = "agosto";
+      break;
+    case 'September':
+      mes = "septiembre";
+      break;
+    case 'October':
+      mes = "octubre";
+      break;
+    case 'November':
+      mes = "noviembre";
+      break;
+    case 'December':
+      mes = "diciembre";
+      break;
+
+  }
+  
+  return mes;
+}
 
 const data = [
     createData(1, 'Camara 3/4', 20),
     createData(2, 'Camara 3/4', 20),
     createData(3, 'Camara 3/4', 20)
   ];
+  
  
 class Pagos extends Component {
-
+  
     constructor() {
         super()
         this.state = { 
@@ -41,11 +87,18 @@ class Pagos extends Component {
       }
       const pagosContrato = localStorage.getItem('pagosContrato');
       const pagosContratoJson = JSON.parse(pagosContrato);
+      if(pagosContratoJson.payments){
+        for(var i=0; i<pagosContratoJson.payments.length;i++){
+          pagosContratoJson.payments[i].month = parseMes(pagosContratoJson.payments[i].month);
+        }
+      }
+      
       console.log('pagosContratoJson',pagosContratoJson);
       this.state.pagos = pagosContratoJson.payments;
       this.state.monto = pagosContratoJson.monthlyCost;
     }
 
+   
 
 
   render() {
