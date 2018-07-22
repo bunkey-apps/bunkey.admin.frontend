@@ -226,13 +226,13 @@ toggleEditCustomerModal = () => {
               <Table>
                 <TableHead>
                   <TableRow hover>
-                    <TableCell>RUT</TableCell>
-                    <TableCell>Datos Contacto</TableCell>
-                    <TableCell>Estado</TableCell>
-                    <TableCell>Tamaño Ocupado</TableCell>
-                    <TableCell>Saldo Atrasado</TableCell>
-                    <TableCell>Usuarios</TableCell>
-                    <TableCell>Acciones</TableCell>
+                    <TableCell><b>RUT</b></TableCell>
+                    <TableCell><b>Datos Contacto</b></TableCell>
+                    <TableCell><b>Estado</b></TableCell>
+                    <TableCell><b>Tamaño Ocupado</b></TableCell>
+                    <TableCell><b>Saldo Atrasado</b></TableCell>
+                    <TableCell><b>Usuarios</b></TableCell>
+                    <TableCell><b>Acciones</b></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

@@ -213,11 +213,11 @@ deleteCustomer() {
               <Table>
                 <TableHead>
                   <TableRow hover>
-                    <TableCell>Nombre</TableCell>
-                    <TableCell>e-mail</TableCell>
-                    <TableCell>Estado</TableCell>
-                    <TableCell>Rol</TableCell>
-                    <TableCell>Acciones</TableCell>
+                    <TableCell><b>Nombre</b></TableCell>
+                    <TableCell><b>E-mail</b></TableCell>
+                    <TableCell><b>Estado</b></TableCell>
+                    <TableCell><b>Rol</b></TableCell>
+                    <TableCell><b>Acciones</b></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

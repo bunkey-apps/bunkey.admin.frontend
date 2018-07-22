@@ -63,9 +63,9 @@ class Pagos extends Component {
             <Table>
               <TableHead>
                 <TableRow hover>
-                  <TableCell>Monto</TableCell>
-                  <TableCell>Mes</TableCell>
-                  <TableCell>Estado</TableCell>
+                  <TableCell><b>Monto</b></TableCell>
+                  <TableCell><b>Mes</b></TableCell>
+                  <TableCell><b>Estado</b></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

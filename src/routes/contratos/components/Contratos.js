@@ -228,11 +228,11 @@ getPagos = (pagos) => {
               <Table>
                 <TableHead>
                   <TableRow hover>
-                    <TableCell>Tamaño Total</TableCell>
-                    <TableCell>Estado</TableCell>
-                    <TableCell>Monto</TableCell>
-                    <TableCell>Pagado</TableCell>
-                    <TableCell>Acciones</TableCell>
+                    <TableCell><b>Tamaño Total</b></TableCell>
+                    <TableCell><b>Estado</b></TableCell>
+                    <TableCell><b>Monto</b></TableCell>
+                    <TableCell><b>Pagado</b></TableCell>
+                    <TableCell><b>Acciones</b></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
