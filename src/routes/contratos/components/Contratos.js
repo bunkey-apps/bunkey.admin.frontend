@@ -330,6 +330,10 @@ getPagos = (pagos) => {
                         <ModalBody>
                             {addNewCustomerForm ?
                                 <Form id="formAdd" onSubmit={this.handleSubmitAdd}>
+                                <div className="row row-eq-height">
+                                <div className="col-sm-6 col-md-5 col-lg-6">
+                               
+                                
                                   <FormGroup>
                                         <Label for="Dni">Tamaño Total (GB)</Label>
                                         <Input
@@ -378,6 +382,9 @@ getPagos = (pagos) => {
                                  
                                         
                                     </FormGroup>
+                                    </div>
+                                    <div className="col-sm-6 col-md-5 col-lg-6">
+                               
                                     <FormGroup>
                                         <Label for="monthlyCost">Cobro Mensual</Label>
                                         <Input
@@ -411,8 +418,12 @@ getPagos = (pagos) => {
                                             onChange={(e) => this.onChangeCustomerAddNewForm('endDate', e.target.value)}
                                         />
                                     </FormGroup>
+                                    </div>
+                                    </div>
                                 </Form>
                                 : <Form id="formEdit" onSubmit={this.handleSubmitEdit} >
+                                <div className="row row-eq-height">
+                                <div className="col-sm-6 col-md-5 col-lg-6">
                                     <FormGroup>
                                         <Label for="Dni">Tamaño Total (GB)</Label>
                                         <Input
@@ -461,6 +472,8 @@ getPagos = (pagos) => {
                                        
                                        
                                     </FormGroup>
+                                    </div>
+                                    <div className="col-sm-6 col-md-5 col-lg-6">
                                     <FormGroup>
                                         <Label for="monthlyCost">Cobro Mensual</Label>
                                         <Input
@@ -494,6 +507,8 @@ getPagos = (pagos) => {
                                             onChange={(e) => this.onChangeCustomerDetails('endDate', e.target.value)}
                                         />
                                     </FormGroup>
+                                    </div>
+                                    </div>
                                 </Form>
                             }
                         </ModalBody>
