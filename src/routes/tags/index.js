@@ -16,6 +16,9 @@ import IntlMessages from '../../util/IntlMessages';
 // rct card box
 import RctCollapsibleCard from '../../components/RctCollapsibleCard/RctCollapsibleCard';
 
+import Tags from './components/Tags';
+
+
 // app config
 import AppConfig from '../../constants/AppConfig';
 
@@ -24,15 +27,16 @@ import AppConfig from '../../constants/AppConfig';
 // For Basic Table
 let id = 0;
 
-function createData(num, nombre, cantidad) {
+function createData(num, nombre, mail, estado, rol) {
   id += 1;
-  return { id, num, nombre, cantidad };
+  return { id, num, nombre, mail, estado, rol };
 }
 
 const data = [
-    createData(1, 'Camara 3/4', 20),
-    createData(2, 'Camara 3/4', 20),
-    createData(3, 'Camara 3/4', 20)
+    createData(1, 'Juanito Perez', 'jp@gmail.com','Activo','Cliente'),
+    createData(2, 'Carlos Lopez', 'carlop@gmail.com','Activo','Cliente'),
+    createData(3, 'Cesar Marquez', 'cesrq@gmail.com','Inactivo','Cliente'),
+
   ];
  
 class TagsPage extends Component {
@@ -48,35 +52,7 @@ class TagsPage extends Component {
 
 
 
-       <RctCollapsibleCard>
-       <div className={'rct-block-title'}>
-                    <h4><b>Lista de Tags</b></h4>
-                    
-                </div>
-          <div className="table-responsive">
-            <Table>
-              <TableHead>
-                <TableRow hover>
-                  <TableCell>Nombre</TableCell>
-                  <TableCell>Acciones</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <Fragment>
-                  {data.map(n => {
-                    return (
-                      <TableRow hover key={n.id}>
-                        <TableCell>{n.nombre}</TableCell>
-                        
-                        <TableCell></TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </Fragment>
-              </TableBody>
-            </Table>
-          </div>
-        </RctCollapsibleCard>
+       <Tags />
 
 
 

@@ -12,6 +12,7 @@ import feedbacksReducer from './FeedbacksReducer';
 import contratosReducer from './ContratosReducer';
 import usuariosReducer from './UsuariosReducer';
 import clientesReducer from './ClientesReducer';
+import tagsReducer from './TagsReducer';
 
 
 
@@ -25,7 +26,8 @@ const reducers = combineReducers({
   feedback: feedbacksReducer,
   contratos: contratosReducer,
   usuarios: usuariosReducer,
-  clientes: clientesReducer
+  clientes: clientesReducer,
+  tags: tagsReducer
 });
 
 export default reducers;
