@@ -12,9 +12,9 @@ import IntlMessages from '../../util/IntlMessages';
 const getDisplayString = (sub) => {
     const arr = sub.split("-");
     if (arr.length > 1) {
-        return <IntlMessages id={`sidebar.${arr[0].charAt(0) + arr[0].slice(1) + arr[1].charAt(0).toUpperCase() + arr[1].slice(1)}`} />
+        return <IntlMessages id={`${arr[0].charAt(0) + arr[0].slice(1) + arr[1].charAt(0).toUpperCase() + arr[1].slice(1)}`} />
     } else {
-        return <IntlMessages id={`sidebar.${sub.charAt(0) + sub.slice(1)}`} />
+        return <IntlMessages id={`${sub.charAt(0) + sub.slice(1)}`} />
     }
 
 };

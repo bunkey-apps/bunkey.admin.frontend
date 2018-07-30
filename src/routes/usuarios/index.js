@@ -41,14 +41,11 @@ const data = [
  
 class UsuariosPage extends Component {
   render() {
+    const { match } = this.props;
      return (
         <div className="dashboard-v1">
-            <div className="page-title d-sm-flex justify-content-between align-items-center">
-                    <div className="page-title-wrap">
-                        <h2 className="">Lista de Usuarios</h2>
-                    </div>
-            </div>
-
+           
+            <PageTitleBar title={<IntlMessages id="Lista de Usuarios" />} match={match} />
 
 
 

@@ -199,12 +199,11 @@ deleteCustomer() {
       render() {
         const { items, loading } = this.props;
         const { newCustomers, sectionReload, alertDialog, editCustomerModal, addNewCustomerForm, editCustomer, snackbar, successMessage, addNewCustomerDetails } = this.state;
-
+        
         return (       
           
           
         <div>
-
 
           
             <RctCollapsibleCard>
