@@ -64,7 +64,9 @@ class Usuarios extends Component {
                 name: '',
                 role: '',
                 workspace: '',
-                clietntOwner: ''
+                clietntOwner: '',
+                passwordRepeat: '',
+                passInvalid : false
             }
       }
       this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
@@ -93,7 +95,9 @@ class Usuarios extends Component {
                 name: '',
                 role: 'admin',
                 workspace: '',
-                clietntOwner: ''
+                clietntOwner: '',
+                passwordRepeat: '',
+                passInvalid : false
             }
         }); 
     }
@@ -111,16 +115,27 @@ class Usuarios extends Component {
     const { addNewCustomerDetails } = this.state;
     if (addNewCustomerDetails.email !== '' && addNewCustomerDetails.password !== '' && addNewCustomerDetails.name !== '' 
     && addNewCustomerDetails.role !== '') {
-        this.setState({ editCustomerModal: false});
-        console.log('addNewCustomerDetails',addNewCustomerDetails);
-        this.props.addUsuario(addNewCustomerDetails);
-        // test despues borrrar y detectar cuando responde el crear
-        setTimeout(() => {
-          this.props.getUsuarios();
-      }, 1000);
+        if(addNewCustomerDetails.password === addNewCustomerDetails.passwordRepeat){
+            this.setState({ editCustomerModal: false});
+            console.log('addNewCustomerDetails',addNewCustomerDetails);
+            this.props.addUsuario(addNewCustomerDetails);
+            // test despues borrrar y detectar cuando responde el crear
+            setTimeout(() => {
+              this.props.getUsuarios();
+          }, 1000);
+        }else{
+            console.log('claves distintas');
+            addNewCustomerDetails.passInvalid = true;
+            this.setState({
+                addNewCustomerDetails:addNewCustomerDetails
+            })
+        }
+       
         
     }
 }
+
+
 
 onSubmitCustomerEditDetailForm() {
   const { editCustomer } = this.state;
@@ -308,6 +323,18 @@ deleteCustomer() {
                                             value={addNewCustomerDetails.password}
                                             onChange={(e) => this.onChangeCustomerAddNewForm('password', e.target.value)}
                                         />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="name">Repetir Clave</Label>
+                                        <Input
+                                            required="true"
+                                            type="password"
+                                            name="passwordRepeat"
+                                            id="passwordRepeat"
+                                            value={addNewCustomerDetails.passwordRepeat}
+                                            onChange={(e) => this.onChangeCustomerAddNewForm('passwordRepeat', e.target.value)}
+                                        />
+                                        {addNewCustomerDetails.passInvalid ? <p className="claves-invalidas">Las claves no son iguales </p> : null}
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="name">Nombre</Label>
