@@ -17,7 +17,7 @@ import MainApp from '../routes';
 // app signin
 import AppSignIn from './SigninFirebase';
 import AppSignUp from './SignupFirebase';
-
+import AppRecuperar from '../routes/recuperar-clave/components/Recuperar';
 // App locale
 import AppLocale from '../lang';
 
@@ -107,6 +107,7 @@ class App extends Component {
             <Route path="/session/404" component={AsyncSessionPage404Component} />
             <Route path="/session/500" component={AsyncSessionPage500Component} />
             <Route path="/terms-condition" component={AsyncTermsConditionComponent} />
+            <Route path="/recuperar-clave" component={AppRecuperar} />
           </React.Fragment>
         </IntlProvider>
       </MuiThemeProvider>
