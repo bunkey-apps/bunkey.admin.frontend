@@ -27,11 +27,15 @@ import AppConfig from '../constants/AppConfig';
 /**
  * Redux Action To Get Clientes
  */
-export const getClientes = () => (dispatch) => {
+export const getClientes = (activePage) => (dispatch) => {
     dispatch({ type: GET_CLIENTES });
     const token = localStorage.getItem('user_id');
 
     const tokenJson = JSON.parse(token);
+
+    if(!activePage){
+        activePage = 1
+    }
 
     console.log('tokenJson4',tokenJson.accessToken);
     var instance2 = axios.create({
@@ -40,10 +44,15 @@ export const getClientes = () => (dispatch) => {
         headers: {'Content-Type': 'application/json','Authorization': 'Bearer ' + tokenJson.accessToken}
       });
    
-    instance2.get('v1/admin/clients')
+    instance2.get(`v1/admin/clients?page=${activePage}`)
         .then((response) => {
-            console.log('response clients2',response);
-            dispatch({ type: GET_CLIENTES_SUCCES, payload: response.data });
+            const data ={
+                data: response.data,
+                limit: response.headers['x-pagination-limit'], 
+                count: response.headers['x-pagination-total-count'], 
+                activePage:activePage
+            }
+            dispatch({ type: GET_CLIENTES_SUCCES, payload: data });
         })
         .catch(error => {
             // error handling

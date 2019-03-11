@@ -40,10 +40,12 @@ export default (state = INIT_STATE, action) => {
         case GET_CLIENTES_SUCCES:
             return {
                 ...state,
-                items: action.payload,
-                loading: false
+                items: action.payload.data,
+                loading: false,
+                count: action.payload.count,
+                limit:action.payload.limit,
+                activePage: action.payload.activePage
             };
-
         case ADD_CLIENTES:
             return { ...state, loading: false };
          case GET_CLIENTES_FAILURE:
