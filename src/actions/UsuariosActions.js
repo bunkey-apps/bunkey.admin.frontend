@@ -28,11 +28,15 @@ import AppConfig from '../constants/AppConfig';
 /**
  * Redux Action To Get Contratos
  */
-export const getUsuarios = () => (dispatch) => {
+export const getUsuarios = (activePage) => (dispatch) => {
     dispatch({ type: GET_USUARIOS });
     const token = localStorage.getItem('user_id');
 
     const tokenJson = JSON.parse(token);
+
+    if(!activePage){
+        activePage = 1
+    }
 
     console.log('tokenJson4',tokenJson.accessToken);
     var instance2 = axios.create({
@@ -41,10 +45,15 @@ export const getUsuarios = () => (dispatch) => {
         headers: {'Content-Type': 'application/json','Authorization': 'Bearer ' + tokenJson.accessToken}
       });
    
-    instance2.get('v1/admin/users')
+    instance2.get(`v1/admin/users?page=${activePage}`)
         .then((response) => {
-            console.log('response usuarios2',response);
-            dispatch({ type: GET_USUARIOS_SUCCES, payload: response.data });
+            const data ={
+                data: response.data,
+                limit: response.headers['x-pagination-limit'], 
+                count: response.headers['x-pagination-total-count'], 
+                activePage:activePage
+            }
+            dispatch({ type: GET_USUARIOS_SUCCES, payload: data });
         })
         .catch(error => {
             // error handling
