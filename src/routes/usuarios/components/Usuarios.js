@@ -206,9 +206,8 @@ handlePageChange = (pageNumber) => {
       render() {
         const { items, loading, limit, count, activePage } = this.props;
         const { newCustomers, sectionReload, alertDialog, editCustomerModal, addNewCustomerForm, editCustomer, snackbar, successMessage, addNewCustomerDetails } = this.state;
-        
+        console.log('items count', items.length)
         return (       
-          
           
         <div>
 
